@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Mada:400,500,600");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font: 400 14px Mada, sans-serif;
+   }
+html{
+   background-color: black;
+}
+
+.conteinerGlobal{
+   margin: 0;
+   padding: 0;
+  
+}
+

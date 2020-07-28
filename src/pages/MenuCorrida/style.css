@@ -1,0 +1,25 @@
+.conteinerMenuCorrida{
+    margin-top: 1px ;
+    padding: 10px 2.5%;
+    background-color:#242e3e;
+    border-radius: 5px;
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+}
+
+.corrida{
+    background-color:transparent;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 35px;
+    width: 100px;
+    border-right: 1px solid #dee2e6!important;
+   
+}
+.textoCorrida{
+    padding: 10px;
+    background-color:transparent;
+    color: white;
+}
