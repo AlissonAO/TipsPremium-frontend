@@ -7,7 +7,7 @@ import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
-import ReactLoading from "react-loading";
+// import ReactLoading from "react-loading";
 registerLocale("ptBR", ptBR);
 
 

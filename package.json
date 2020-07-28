@@ -1,5 +1,5 @@
 {
-  "name": "front-end",
+  "name": "tippremium",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,5 +36,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlissonAO/TipsPremium-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlissonAO/TipsPremium-frontend/issues"
+  },
+  "homepage": "https://github.com/AlissonAO/TipsPremium-frontend#readme",
+  "description": ""
 }
