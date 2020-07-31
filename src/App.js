@@ -5,7 +5,7 @@ import Menu from './pages/Menu'
 import MenuCorrida from './pages/MenuCorrida';
 import Tabela from './pages/Dashboard/Tabela/index'
 
-import ResultadoCorrida from './pages/ResultadoCorridas/index';
+import ResultadoCorrida from './pages/ResultadoCorridas/ResultadoCorrida';
 
 function App() 
 {

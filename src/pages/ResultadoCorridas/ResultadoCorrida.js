@@ -3,40 +3,44 @@ import { Button, Card, CardHeader, CardBody } from 'reactstrap';
 import DatePicker, { registerLocale } from "react-datepicker";
 import api from '../../Api/Api';
 import './style.css';
-import { format, parseISO } from 'date-fns';
+// import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
-// import ReactLoading from "react-loading";
+import LoadingOverlay from 'react-loading-overlay';
+
 registerLocale("ptBR", ptBR);
 
 
 export default function ResultadoCorrida() {
     // 
     const [dateSelecionanda, setAutoClose] = useState(new Date());
-    // const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const [list, setList] = useState([]);
     const [key, setKeys] = useState([])
 
     async function carregarListar() {
+        setLoading(false);
         const response = await api.get('/listarResultados', {
             params: {
                 data: dateSelecionanda.toISOString()
             }
         }
         )
+       
         if (response.data.length === 0) {
             return swal("Não há registro para essa data ", "", "info", {
                 className: "swal-footer",
             });
         } else {
+            console.log(response.data)
             setList(response.data)
             setKeys(Object.keys(response.data[0]))
 
         }
-
-
+        setLoading(true);
+       
     }
 
     const autoClosee = date => {
@@ -48,21 +52,23 @@ export default function ResultadoCorrida() {
         setList([])
         setAutoClose(new Date())
         setKeys([])
+
+
     }
 
-    const formataData = (data) => {
-        console.log(data)
-        // "H:mm:ss a"
-        const parsedDate = format(parseISO(data), "H:mm:ss a");
-        console.log(parsedDate.toLocaleString())
-        return parsedDate;
-    }
+    // const formataData = (data) => {
+    //     // console.log(data)
+    //     // "H:mm:ss a"
+    //     const parsedDate = format(parseISO(data), "H:mm:ss a");
+    //     console.log(parsedDate.toLocaleString())
+    //     return parsedDate;
+    // }
 
     const Rows = list.map(linha => (
-        <tr key={linha}>
+            <tr key={linha}>
             <td>{linha.nomegalgo}</td>
-            <td>{formataData(linha.datainicio)}</td>
-            <td>{formataData(linha.datafim)}</td>
+            <td>{linha.datainicio}</td>
+            <td>{linha.datafim}</td>
             <td>{linha.pista}</td>
             <td>{linha.grade}</td>
             <td>{linha.trap}</td>
@@ -70,28 +76,15 @@ export default function ResultadoCorrida() {
             <td>{linha.odd_back}</td>
             <td>{linha.probabilidade}</td>
             <td>{linha['Total Galgo']}</td>
-            <td>{linha.win.toString()}</td>
-            <td>{linha['total da corrida']}</td>
+            <td>{linha.win}</td>
+            <td>{linha['Total da corrida']}</td>
 
         </tr>
+        ))
+    
 
-    )
 
 
-    )
-
-    async function teste() {
-
-        const teste = await Rows;
-        if (teste) {
-            console.log("olaa")
-
-        } else {
-            console.log("naoo")
-        }
-
-        return teste
-    }
     const DataPic = ({ title, children }) => (
         <Card>
             <CardHeader>
@@ -101,9 +94,10 @@ export default function ResultadoCorrida() {
         </Card>
     );
 
-    return (
+     return (
         <div className="conteiner" >
-            <div className="conteiner-data" >
+
+            <div  >
                 <Card className="card-data">
                     <CardHeader>
                         <h1>Consultar resultado Betfair</h1>
@@ -117,7 +111,7 @@ export default function ResultadoCorrida() {
                                 locale="ptBR"
                                 dateFormat="dd/MM/yyyy"
                                 selected={dateSelecionanda}
-                                onSelect={dateSelecionanda => autoClosee(dateSelecionanda)}
+                                onChange={dateSelecionanda => autoClosee(dateSelecionanda)}
                                 maxDate={new Date()}
                                 className="form-control"
                             />
@@ -132,28 +126,48 @@ export default function ResultadoCorrida() {
                 </Card>
             </div>
             <div >
-                <Card className="card-table ">
-                    <CardHeader className="card-header-table">
-                    </CardHeader>
-                    <CardBody className="card-body">
+               {
+                   loading ? (
+                    <Card className="card-table ">
+                        <CardHeader className="card-table card-header-table">
+                        </CardHeader>
+                        <CardBody>
+                            <table className="table" >
+                                <thead >
+                                    <tr>
+                                        {key.map((item) => <th key={item}>{item}</th>)}
+                                    </tr>
+                                </thead>
+                                <tbody className="card-table" >
+                                    {
+                                        Rows
+                                    }
+                                </tbody>
+                            </table>
+                        </CardBody>
 
-                        <table className="table" >
-                            <thead >
-                                <tr>
-                                {key.map((item) => <th key={item}>{item}</th>)}
-                                </tr>
-                            </thead>
-                            <tbody className="card-table" >
-                                {
-                                    Rows
-                                    // list.map(linha => <Linha linha={linha} />)
-                                }
-
-                            </tbody>
-                        </table>
-                    </CardBody>
-
-                </Card>
+                    </Card>
+                    
+                ) :( 
+                     <LoadingOverlay
+                    active={!loading}
+                    spinner 
+                    text='Carregando os resultados...' 
+                    className="spinner"
+                    styles={{
+                        overlay: {
+                            "background-color": "#1d2431",
+                            "padding": "10px",
+                        },
+                        content: {
+                            "font-size": "20px",
+                            "margin-bottom": "10px",
+                            "margin-right": "180px",
+                        },
+                      }}
+                    />
+                    )
+                }
 
             </div>
 

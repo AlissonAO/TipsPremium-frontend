@@ -56,7 +56,7 @@ h1{
 }
 
 
-.card-header-table {
+.card-table card-header-table {
     border-bottom: 1px solid #1d2431;
     padding: 20px 25px;
 
@@ -145,6 +145,12 @@ td{
     width: 40%;
     height: 40px;
     
+  }
+
+  .spinner{
+      color: white;
+      text-align: center;
+      
   }
 
   
