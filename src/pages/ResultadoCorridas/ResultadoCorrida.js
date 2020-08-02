@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, CardHeader, CardBody } from 'reactstrap';
-import DatePicker, { registerLocale } from "react-datepicker";
+import DatePicker from "react-datepicker";
 import api from '../../Api/Api';
 import './style.css';
 // import { format, parseISO } from 'date-fns';
@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
 import LoadingOverlay from 'react-loading-overlay';
 
-registerLocale("ptBR", ptBR);
+
 
 
 export default function ResultadoCorrida() {
@@ -28,19 +28,20 @@ export default function ResultadoCorrida() {
             }
         }
         )
-       
+
         if (response.data.length === 0) {
+            setLoading(true);
             return swal("Não há registro para essa data ", "", "info", {
                 className: "swal-footer",
-            });
+            }
+            );
         } else {
-            console.log(response.data)
             setList(response.data)
             setKeys(Object.keys(response.data[0]))
 
         }
         setLoading(true);
-       
+
     }
 
     const autoClosee = date => {
@@ -65,7 +66,7 @@ export default function ResultadoCorrida() {
     // }
 
     const Rows = list.map(linha => (
-            <tr key={linha}>
+        <tr key={linha}>
             <td>{linha.nomegalgo}</td>
             <td>{linha.datainicio}</td>
             <td>{linha.datafim}</td>
@@ -80,8 +81,8 @@ export default function ResultadoCorrida() {
             <td>{linha['Total da corrida']}</td>
 
         </tr>
-        ))
-    
+    ))
+
 
 
 
@@ -94,10 +95,10 @@ export default function ResultadoCorrida() {
         </Card>
     );
 
-     return (
-        <div className="conteiner" >
+    return (
+        <div className="conteiner-result" >
 
-            <div  >
+            <div>
                 <Card className="card-data">
                     <CardHeader>
                         <h1>Consultar resultado Betfair</h1>
@@ -112,6 +113,7 @@ export default function ResultadoCorrida() {
                                 dateFormat="dd/MM/yyyy"
                                 selected={dateSelecionanda}
                                 onChange={dateSelecionanda => autoClosee(dateSelecionanda)}
+                                minDate={new Date('2020-07-19')}
                                 maxDate={new Date()}
                                 className="form-control"
                             />
@@ -126,47 +128,47 @@ export default function ResultadoCorrida() {
                 </Card>
             </div>
             <div >
-               {
-                   loading ? (
-                    <Card className="card-table ">
-                        <CardHeader className="card-table card-header-table">
-                        </CardHeader>
-                        <CardBody>
-                            <table className="table" >
-                                <thead >
-                                    <tr>
-                                        {key.map((item) => <th key={item}>{item}</th>)}
-                                    </tr>
-                                </thead>
-                                <tbody className="card-table" >
-                                    {
-                                        Rows
-                                    }
-                                </tbody>
-                            </table>
-                        </CardBody>
+                {
+                    loading ? (
+                        <Card className="card-table ">
+                            <CardHeader className="card-table card-header-table">
+                            </CardHeader>
+                            <CardBody>
+                                <table className="table" >
+                                    <thead >
+                                        <tr>
+                                            {key.map((item) => <th key={item}>{item}</th>)}
+                                        </tr>
+                                    </thead>
+                                    <tbody className="card-table" >
+                                        {
+                                            Rows
+                                        }
+                                    </tbody>
+                                </table>
+                            </CardBody>
 
-                    </Card>
-                    
-                ) :( 
-                     <LoadingOverlay
-                    active={!loading}
-                    spinner 
-                    text='Carregando os resultados...' 
-                    className="spinner"
-                    styles={{
-                        overlay: {
-                            "background-color": "#1d2431",
-                            "padding": "10px",
-                        },
-                        content: {
-                            "font-size": "20px",
-                            "margin-bottom": "10px",
-                            "margin-right": "180px",
-                        },
-                      }}
-                    />
-                    )
+                        </Card>
+
+                    ) : (
+                            <LoadingOverlay
+                                active={!loading}
+                                spinner
+                                text='Carregando os resultados...'
+                                className="spinner"
+                                styles={{
+                                    overlay: {
+                                        "background-color": "#1d2431",
+                                        "padding": "10px",
+                                    },
+                                    content: {
+                                        "font-size": "20px",
+                                        "margin-bottom": "10px",
+                                        "margin-right": "180px",
+                                    },
+                                }}
+                            />
+                        )
                 }
 
             </div>

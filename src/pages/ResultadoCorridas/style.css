@@ -1,6 +1,7 @@
-.conteiner{
+.conteiner-result{
     margin-top: 1px ;
     padding: 10px 2.5%;
+
     
 }
 
@@ -90,8 +91,6 @@ tbody tr:hover {
     margin-right: 50px;
     text-align: center;
 }
-
-
 th{
     color: #adb7be;
     border-bottom: 1px solid red !important;
@@ -101,9 +100,8 @@ th{
     font-size: 15px !important;
     position: sticky;
     top: 0;
-    
-  
 }
+
 
 td{
     color: #adb7be;
@@ -115,7 +113,7 @@ td{
     color: #adb7be;
 } */
 
-  .conteiner-pesquisar-button button{
+.conteiner-pesquisar-button button{
     padding: 10px 20px;
     border-radius: 0.50rem;
     font-size: 14px;
@@ -130,8 +128,7 @@ td{
     width: 40%;
   }
 
-  
-  .conteiner-clear-button button{
+.conteiner-clear-button button{
     padding: 10px 25px;
     border-radius: 0.50rem;
     font-size: 14px;
@@ -147,7 +144,7 @@ td{
     
   }
 
-  .spinner{
+.spinner{
       color: white;
       text-align: center;
       

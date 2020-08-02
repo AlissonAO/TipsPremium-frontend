@@ -6,9 +6,11 @@
     padding: 0;
     box-sizing: border-box;
     font: 400 14px Mada, sans-serif;
+    
    }
 html{
    background-color: black;
+   
 }
 
 .conteinerGlobal{

@@ -1,53 +1,42 @@
 import React, { useState, useEffect } from 'react';
-
 import './style.css';
-import { Button } from 'reactstrap';
 import Tabela from '../Dashboard/Tabela/index'
-import { Table } from 'react-bootstrap';
-import { render } from '@testing-library/react';
+import { Button, Card, CardHeader, CardBody } from 'reactstrap';
+
+import api from '../../Api/Api'
+
 export default function MenuCorrida() {
-
+        const [listCorrida, setCorridas] = useState([]);
         const [contador, setContador] = useState(0)
-        function obterDetalheCorrida() {
-                console.log("aki")
-                setContador(contador + 1);
 
+        useEffect(() => {
+                async function obterlista() {
+                        const response = await api.get('/listarCorridas')
+                        console.log(response.data)
+                        setCorridas(response.data);
+                }
+                obterlista()
+
+        }, [contador])
+
+
+        function obterDetalheCorrida() {
+                setContador(contador + 1)
         }
-        
+
         return (
 
-
                 <div className="conteinerMenuCorrida">
-                        <div className="corrida">
-                                <Button data={contador} onClick={obterDetalheCorrida} className="textoCorrida">A3 460m</Button>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
-                        <div className="corrida">
-                                <h6 className="textoCorrida">A3 460m</h6>
-                        </div>
+                                {listCorrida.map(item =>(
+                       <Card className="card-corrida" >
+                                     <CardBody className="card-body-corridas">
+                                            <h1 className="textoCorrida">{item.marketName} </h1>
+
+                                     </CardBody>   
+
+                        </Card>
+                                ))}
+                              
                 </div>
         );
 

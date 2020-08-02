@@ -1,25 +1,29 @@
 .conteinerMenuCorrida{
-    margin-top: 1px ;
-    padding: 10px 2.5%;
+    margin: 10px 20px;
+    padding: 1x 1px;
     background-color:#242e3e;
     border-radius: 5px;
-    height: 65px;
+    height: auto;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+ 
 }
 
-.corrida{
-    background-color:transparent;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    height: 35px;
-    width: 100px;
-    border-right: 1px solid #dee2e6!important;
-   
+.card-corrida{
+    transition: all 0.5s ease-in-out;
+    box-shadow:  0 1px 20px 0 rgba(0,0,0,.08);
+    border-right: 1px solid black !important;
+}
+
+.card-body-corridas{
+    padding: 1px 1px;
+    padding-right: 5px;
 }
 .textoCorrida{
-    padding: 10px;
+    padding: 10px 10px;
     background-color:transparent;
-    color: white;
+    color: #adb7be;
+    font-size: 16px;
+    line-height: 1.2
 }
