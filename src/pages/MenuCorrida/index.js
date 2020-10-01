@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
+import React, { useState, useEffect } from 'react'
+import './style.css'
 import Tabela from '../Dashboard/Tabela/index'
-import { Button, Card, CardHeader, CardBody } from 'reactstrap';
+import { Button, Card, CardHeader, CardBody } from 'reactstrap'
 
 import api from '../../Api/Api'
+import { Redirect } from 'react-router-dom'
 
-export default function MenuCorrida() {
-        const [listCorrida, setCorridas] = useState([]);
-        const [contador, setContador] = useState(0)
+export default function MenuCorrida(props) {
+  const [click, setClick] = useState(false)
+  // console.log(props);
 
-        useEffect(() => {
-                async function obterlista() {
-                        const response = await api.get('/listarCorridas')
-                        console.log(response.data)
-                        setCorridas(response.data);
-                }
-                obterlista()
+  const [listCorrida, setCorridas] = useState([])
+  // const [contador, setContador] = useState(0)
 
-        }, [contador])
+  //  obterDetalheCorrida() {
+  //         setContador(contador + 1)
+  // }
 
+  useEffect(() => {
+    async function obterlista() {
+      const response = await api.get('/listarCorridas')
+      console.log(response.data)
+      setCorridas(response.data)
+    }
+    obterlista()
+  }, [])
 
-        function obterDetalheCorrida() {
-                setContador(contador + 1)
-        }
+  const handleMarketID = (item) => {
+    props.obterIdMarket(item)
+  }
 
-        return (
-
-                <div className="conteinerMenuCorrida">
-                                {listCorrida.map(item =>(
-                       <Card className="card-corrida" >
-                                     <CardBody className="card-body-corridas">
-                                            <h1 className="textoCorrida">{item.marketName} </h1>
-
-                                     </CardBody>   
-
-                        </Card>
-                                ))}
-                              
-                </div>
-        );
-
+  return (
+    <div className='conteinerMenuCorrida'>
+      {listCorrida.map((item) => (
+        <div onClick={() => handleMarketID(item)}>
+          <Card className='card-corrida'>
+            <CardBody className='card-body-corridas'>
+              <h1 className='textoCorrida'>{item.marketName} </h1>
+            </CardBody>
+          </Card>
+        </div>
+      ))}
+      <div></div>
+    </div>
+  )
 }
-
