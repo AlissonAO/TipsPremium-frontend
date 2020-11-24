@@ -1,126 +1,34 @@
-.conteinerTabela{
-    margin: 10px 20px;
-    padding: 10px;
-    background-color: #242e3e !important;
-    border-radius: 5px;
-    width: auto;
-    height: auto;
+.conteinerTabela {
+  margin: 10px 20px;
+  padding: 10px;
+  background-color: #242e3e !important;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  color: #fff;
 }
 
-.card {
-    background-color: transparent ;
-    border: 0;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
-}
-
-.card-header {
-    background-color: transparent;
-    border-bottom: 1px solid  #1d2431;
-    padding: 20px 25px;
-    position: relative;
-
-}
-.card .card-header .card-title {
-    color: #fff;
-    font-weight: 100;
-      
-}
-
-.card .card-body {
-    padding: 10px;
-    background-color: transparent;
-    
-}
-.card .card-title {
-    margin-bottom: .75rem;
-    background-color: transparent;
-    
-}
 .table-responsive {
-    background-color: transparent;
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    background-color: transparent;
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  background-color: #fff;
 }
 
-h5 {
-    font-size: 18px;
-    background-color: transparent;
-}
-.ps {
-    overflow: hidden!important;
-    overflow-anchor: none;
-    -ms-overflow-style: none;
-    touch-action: auto;
-    -ms-touch-action: auto;
-    background-color: #242e3e;
-}
-
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-}
-
-.table-card {
-   border-bottom-color: #242e3e;
-}
-        
-.table-card br {
-    border-right-color: #242e3e;
-    background-color: #242e3e;
-}
-
-.text-primary {
-    color: seashell !important;
-    background-color: #242e3e;
-}
-.card.Header{
-    background-color: transparent;
-}
-.card-body {
-    padding: 20px 25px;
-    background-color: transparent;
-}
+/* h5 {
+  font-size: 18px;
+  background-color: transparent;
+} */
 
 .table-hover tbody tr:hover {
-    color: #adb7be;;
+  color: #adb7be;
 }
 
 .text-center {
-    text-align: left!important;
-}
-
-.ps__rail-x {
-    height: 15px;
-    bottom: 0;
-}
-
-.ps__rail-y {
-    width: 15px;
-    right: 0;
-}
-td{
-    color: seashell;
-    background-color: transparent;
-    padding: 1.05rem .75rem
-}
-th {
-    font-size: 12px;
-    text-align: inherit;
-    color: #adb7be;
-    background-color: transparent;
-    text-transform: uppercase;
-    padding-left: 10px;
-}
-tr{
-    background-color: transparent;
+  text-align: left !important;
 }
 
 /* .progress-bar {
@@ -132,4 +40,7 @@ tr{
     white-space: nowrap;
     background-color: $progress-bar-bg;
   } */
-  
+
+.tab-dados {
+  background-color: transparent;
+}

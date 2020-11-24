@@ -1,154 +1,135 @@
-.conteiner-result{
-    margin-top: 1px ;
-    padding: 10px 2.5%;
-
-    
+.conteiner-result {
+  margin-top: 1px;
+  padding: 10px 2.5%;
 }
 
-.card-data{
-    margin-top: 1px ;
-    padding: 10px 2.5%;
-    background-color: #222c3b;
-    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.08);
-    height: 100%;
-    width: 100%;
-    
+.card-data {
+  margin-top: 1px;
+  padding: 10px 2.5%;
+  background-color: #222c3b;
+  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.08);
+  height: 100%;
+  width: 100%;
 }
 
-.texto-data{
-    height: auto;
-    width: auto;
-    margin-left: 470px;
-    margin-right: 250px;
-    padding-bottom: 20px;
-    margin-top: 11px;
-    
-
+.texto-data {
+  height: auto;
+  width: auto;
+  margin-left: 470px;
+  margin-right: 250px;
+  padding-bottom: 20px;
+  margin-top: 11px;
 }
 .card-body-data {
-    height: 100%;
-    width: 100%;
-    display: flex;
-   
-   
-  }
-h3{
-    color: #c9d0d5;
-    font-size: 24px;
-    font-weight: 600;
-    text-align: center;
-    
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
-h1{
-    color: #c9d0d5;
-    font-size: 30px;
-    font-weight: 600;
+h3 {
+  color: #c9d0d5;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
 }
-  
-.card-table{
-   background-color:#222c3b;
-   margin-top: 1px ;
-   padding: 1px 2.5%;
-   padding-left: 1px;
-   height: 100%;
-   width: 100%;
-   
-   
+h1 {
+  color: #c9d0d5;
+  font-size: 30px;
+  font-weight: 600;
 }
 
+.card-table {
+  background-color: #222c3b;
+  margin-top: 1px;
+  padding: 1px 2.5%;
+  padding-left: 1px;
+  height: 100%;
+  width: 100%;
+}
 
 .card-table card-header-table {
-    border-bottom: 1px solid #1d2431;
-    padding: 20px 25px;
-
+  border-bottom: 1px solid #1d2431;
+  padding: 20px 25px;
 }
 
 tbody tr:hover {
-    background-color: rgba(54, 219, 142, 0.05);
-
-  }
-
-.table{
-    border-collapse: collapse;
-    text-align: center;
-    height: 100%;
-    width: 100%;
-  
-    
+  background-color: rgba(54, 219, 142, 0.05);
 }
+
+/* .table {
+  border-collapse: collapse;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+} */
 .swal-footer {
-    text-align: center;
+  text-align: center;
 }
 
 .form-control {
-    background-color: #1b222e;
-    color: #7a7e81;
-    border-color: #242e3e solid ;
-    border-style: solid;
-    font-size: 15px;
-    padding: 10px 5px;
-    margin-top: 8px;
-    margin-right: 50px;
-    text-align: center;
+  background-color: #1b222e;
+  color: #7a7e81;
+  border-color: #242e3e solid;
+  border-style: solid;
+  font-size: 15px;
+  padding: 10px 5px;
+  margin-top: 8px;
+  margin-right: 50px;
+  text-align: center;
 }
-th{
-    color: #adb7be;
-    border-bottom: 1px solid red !important;
-    white-space: nowrap;
-    background: #363d47;
-    padding: 1.05rem 0.75rem;
-    font-size: 15px !important;
-    position: sticky;
-    top: 0;
-    text-transform: uppercase;
-}
+/* th {
+  color: #adb7be;
+  border-bottom: 1px solid red !important;
+  white-space: nowrap;
+  background: #363d47;
+  padding: 1.05rem 0.75rem;
+  font-size: 15px !important;
+  position: sticky;
+  top: 0;
+  text-transform: uppercase;
+} */
 
-
+/* 
 td{
     color: #adb7be;
     white-space: nowrap;
     padding: 1.05rem .75rem;
     border-top: 3px solid #1e2734;
-}
+} */
 /* .card-table table table-hover{
     color: #adb7be;
 } */
 
-.conteiner-pesquisar-button button{
-    padding: 10px 20px;
-    border-radius: 0.50rem;
-    font-size: 14px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 25%;
-    height: 40px;
-    background-color: #4caf50;
-    border-color: #47a44b;
-    text-align: center;
-    color: #fff;
-    width: 40%;
-  }
+.conteiner-pesquisar-button button {
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 25%;
+  height: 40px;
+  background-color: #4caf50;
+  border-color: #47a44b;
+  text-align: center;
+  color: #fff;
+  width: 40%;
+}
 
-.conteiner-clear-button button{
-    padding: 10px 25px;
-    border-radius: 0.50rem;
-    font-size: 14px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    margin-left: 25%;
-    background-color: #00acc1;
-    border-color: #009eb2;
-    text-align: center;
-    color: #fff;
-    width: 40%;
-    height: 40px;
-    
-  }
+.conteiner-clear-button button {
+  padding: 10px 25px;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 25%;
+  background-color: #00acc1;
+  border-color: #009eb2;
+  text-align: center;
+  color: #fff;
+  width: 40%;
+  height: 40px;
+}
 
-.spinner{
-      color: white;
-      text-align: center;
-      
-  }
-
-  
+.spinner {
+  color: white;
+  text-align: center;
+}
