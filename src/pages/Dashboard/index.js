@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Tabela from "./Tabela";
 import "./style.css";
-import MenuCorrida from "../MenuCorrida/index";
+// import MenuCorrida from "../MenuCorrida/index";
+// import Tabela from "./Tabela";
 import Menu from "../Menu/index";
-import Player from "../../pages/Dashboard/Player";
+// import Player from "../../pages/Dashboard/Player";
+
 import { connect, disconnect, subscriberDadosPista } from "../../Api/socket";
+
 export default function DashBoard() {
   const [corrida, setCorrida] = useState([]);
   const [dadosAposta, setDadosAposta] = useState([]);
@@ -26,11 +28,11 @@ export default function DashBoard() {
 
   return (
     <div>
-      <div className=".conteiner-dashboard">
+      <div className="conteiner-dashboard">
         <Menu></Menu>
-        <MenuCorrida obterIdMarket={handleMarket}></MenuCorrida>
+        {/* <MenuCorrida obterIdMarket={handleMarket}></MenuCorrida>
         <Player></Player>
-        <Tabela marketDados={corrida}></Tabela>
+        <Tabela marketDados={corrida}></Tabela> */}
       </div>
     </div>
   );

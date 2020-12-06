@@ -17,6 +17,13 @@
 
   background-color: #fff;
 }
+/* .table-row {
+   {
+    "& > *": {
+      borderbottom: "unset";
+    }
+  }
+} */
 
 /* h5 {
   font-size: 18px;

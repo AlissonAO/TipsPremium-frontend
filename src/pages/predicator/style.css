@@ -1,0 +1,107 @@
+.conteiner-predicator {
+  margin: 10px 20px;
+  padding: 1x 1px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.predictor-contain {
+}
+
+.coteiner-btn {
+  display: flex;
+  align-items: center;
+  flex-grow: 4;
+}
+.bt-run {
+  padding: 10px 25px;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 40%;
+  background-color: #00acc1;
+  border-color: #009eb2;
+  text-align: center;
+  color: #fff;
+  width: 20%;
+  height: 40px;
+}
+.track {
+  background: white;
+  width: 100%;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
+
+.track-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-size: cover;
+}
+
+.rabbit {
+  width: 135px;
+  height: 20px;
+  color: white;
+  padding-top: 1px;
+  top: 474px;
+  left: 240px;
+  display: inline-block;
+  background-image: url("../../asserts/predicator/rabbit.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  /* animation-name: run;
+  animation-fill-mode: forwards; */
+  /* animation-duration: 5s; */
+}
+
+/* @keyframes runn {
+  0% {
+    left: 220px;
+  }
+  100% {
+    left: 1070px;
+  }
+} */
+
+.dog {
+  width: 80px;
+  height: 32px;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  font-weight: 500;
+  /* top: 525px; */
+  left: 150px;
+  position: absolute;
+  display: inline-block;
+  background-image: url("../../asserts/predicator/dog.gif");
+  background-size: cover;
+  /* animation-name: run1;
+  animation-fill-mode: forwards; */
+}
+
+/* @keyframes run1 {
+  0% {
+    left: 220px;
+  }
+  100% {
+    left: 1020px;
+  }
+} */
+
+/* @-webkit-keyframes run1 {
+  0% {
+    left: 200px;
+  }
+  25% {
+    left: 200px;
+  } */
+/* } */

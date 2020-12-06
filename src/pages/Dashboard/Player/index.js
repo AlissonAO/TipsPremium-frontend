@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
+
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import ReactPlayer from "react-player";
@@ -11,9 +12,9 @@ import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
-
 import clsx from "clsx";
 import { CardContent, Collapse } from "@material-ui/core";
+
 export default function Player() {
   const [expanded, setExpanded] = useState(false);
   const useStyles = makeStyles((theme) => ({
@@ -45,6 +46,7 @@ export default function Player() {
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
             })}
+            size="medium"
             onClick={handleExpandClick}
             aria-expanded={expanded}
           >

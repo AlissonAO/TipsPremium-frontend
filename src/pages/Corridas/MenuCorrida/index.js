@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import Tabela from "../Dashboard/Tabela/index";
+import Tabela from "../Tabela/index";
 import { Button, Card, CardHeader, CardBody } from "reactstrap";
 
-import api from "../../Api/Api";
+import api from "../../../Api/Api";
 import { Redirect } from "react-router-dom";
 
 export default function MenuCorrida(props) {

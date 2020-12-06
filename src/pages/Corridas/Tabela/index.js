@@ -31,20 +31,31 @@ import BKW from "../../../asserts/dogs/BKW.png";
 import WF from "../../../asserts/dogs/WF.png";
 
 import Paper from "@material-ui/core/Paper";
+import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { makeStyles } from "@material-ui/core/styles";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import clsx from "clsx";
 
 export default function Tabela(props) {
   const [loading, setLoading] = useState(true);
   const [listGalgos, setListGalgos] = useState([]);
+  const [listHist, setListHist] = useState([]);
   const [teste, setTeste] = useState(0);
   const [key, setKeys] = useState([]);
   const [listCarregada, setlistCarregada] = useState(false);
   const [value, setValue] = useState(0);
-  //  console.log('Chegou os dados Socket ' + props.marketDados)
-  console.log("Chegou o iD  " + props.marketDados);
+  const [open, setOpen] = useState(false);
+
+  console.log("Chegou os dados Socket " + props.marketDados);
+  // console.log("Chegou o iD  " + JSON.stringify(props.marketDados));
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
   const corDogs = {
     BE: BE,
@@ -114,6 +125,7 @@ export default function Tabela(props) {
     setLoading(false);
     // const interval = setInterval(() => {
     setListGalgos(props.marketDados);
+
     // if (props.marketDados !== null) {
     // obterdados();
     // }
@@ -121,7 +133,7 @@ export default function Tabela(props) {
     // return () => {
     //   // clearInterval(interval);
     // };
-  }, [listGalgos, props.marketDados]);
+  }, [props.marketDados]);
 
   // const Rows = listGalgos.map((linha) => (
   //   <tr key={linha}>
@@ -145,30 +157,32 @@ export default function Tabela(props) {
       </td> */
   //   </tr>
   // ));
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+  const useRowStyles = makeStyles((theme) => ({
+    root: {
+      "& > *": {
+        borderBottom: "unset",
+      },
+    },
+    expand: {
+      transform: "rotate(0deg)",
+      marginLeft: "auto",
+      transition: theme.transitions.create("transform", {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: "rotate(180deg)",
+    },
+  }));
+  const classes = useRowStyles();
 
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-
+  const handletableClick = () => {
+    setOpen(!open);
+  };
   return (
     <div>
       {/* {loading ? ( */}
@@ -180,36 +194,49 @@ export default function Tabela(props) {
             <Tab label="AvB" />
           </Tabs>
         </Paper>
-        <TabPanel value={value} index={0}>
-          <TableContainer className="table-responsive">
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Trap</TableCell>
-                  <TableCell>Galgo</TableCell>
-                  <TableCell>Cor</TableCell>
-                  <TableCell>Sexo</TableCell>
-                  <TableCell>Peso</TableCell>
-                  <TableCell>Rating</TableCell>
-                  <TableCell>Favorito</TableCell>
-                  <TableCell>Resultado</TableCell>
-                  <TableCell>Top Time</TableCell>
-                  <TableCell>M. Pos</TableCell>
-                  <TableCell>U. Pos</TableCell>
-                  <TableCell>M. Tempo</TableCell>
-                  <TableCell>Top Split</TableCell>
-                  <TableCell>M. Split</TableCell>
-                  <TableCell>Recup. Media</TableCell>
-                  <TableCell>BRT</TableCell>
-                  <TableCell>Top Speed</TableCell>
-                </TableRow>
-              </TableHead>
+        <TableContainer component={Paper} className="table-responsive">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Trap</TableCell>
+                <TableCell>Galgo</TableCell>
+                <TableCell>Cor</TableCell>
+                <TableCell>Sexo</TableCell>
+                <TableCell>Peso</TableCell>
+                <TableCell>Rating</TableCell>
+                <TableCell>Favorito</TableCell>
+                <TableCell>Resultado</TableCell>
+                <TableCell>Top Time</TableCell>
+                <TableCell>M. Pos</TableCell>
+                <TableCell>U. Pos</TableCell>
+                <TableCell>M. Tempo</TableCell>
+                <TableCell>Top Split</TableCell>
+                <TableCell>M. Split</TableCell>
+                <TableCell>Recup. Media</TableCell>
+                <TableCell>BRT</TableCell>
+                <TableCell>Top Speed</TableCell>
+              </TableRow>
+            </TableHead>
 
-              <TableBody>
-                {listGalgos.dogs
-                  ? listGalgos.dogs.map((dog) => {
-                      return (
-                        <TableRow key={dog}>
+            <TableBody>
+              {listGalgos.dogs
+                ? listGalgos.dogs.map((dog) => {
+                    return (
+                      <React.Fragment>
+                        <TableRow className={classes.root} key={dog}>
+                          <TableCell>
+                            <IconButton
+                              className={clsx(classes.expand, {
+                                [classes.expandOpen]: open,
+                              })}
+                              size="medium"
+                              onClick={handletableClick}
+                              aria-expanded={open}
+                            >
+                              <ExpandMoreIcon className="butum-expasion" />
+                            </IconButton>
+                          </TableCell>
                           <TableCell component="th" scope="row">
                             <img
                               src={imagens[dog.trap]}
@@ -242,19 +269,66 @@ export default function Tabela(props) {
                           <TableCell>{dog.brt}</TableCell>
                           <TableCell>{dog.top_speed}</TableCell>
                         </TableRow>
-                      );
-                    })
-                  : null}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          Historico
-        </TabPanel>
-        <TabPanel value={value} index={2}>
+                        <TableRow>
+                          {console.log()}
+                          <TableCell
+                            style={{ paddingBottom: 0, paddingTop: 0 }}
+                            colSpan={6}
+                          >
+                            <Collapse in={open} timeout="auto" unmountOnExit>
+                              <Box margin={1}>
+                                <Typography
+                                  variant="h6"
+                                  gutterBottom
+                                  component="div"
+                                >
+                                  History
+                                </Typography>
+                                <Table aria-label="purchases">
+                                  <TableHead>
+                                    <TableRow>
+                                      <TableCell>Date</TableCell>
+                                      <TableCell>Customer</TableCell>
+                                      <TableCell align="right">
+                                        Amount
+                                      </TableCell>
+                                      <TableCell align="right">
+                                        Total price ($)
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableHead>
+                                  <TableBody>
+                                    {dog.hist.map((historyRow) => (
+                                      <TableRow key={historyRow.date}>
+                                        <TableCell component="th" scope="row">
+                                          {historyRow.grade}
+                                        </TableCell>
+                                        <TableCell>
+                                          {historyRow.customerId}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                          {historyRow.amount}
+                                        </TableCell>
+                                        <TableCell align="right"></TableCell>
+                                      </TableRow>
+                                    ))}
+                                  </TableBody>
+                                </Table>
+                              </Box>
+                            </Collapse>
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })
+                : null}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        {/* <TabPanel value="2">Historico</TabPanel>
+        <TabPanel value="3" index={2}>
           AvB
-        </TabPanel>
+        </TabPanel> */}
       </div>
       {/* ) : (
       <LoadingOverlay
