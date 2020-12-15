@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./style.css";
 
+import { connect } from "react-redux";
 import api from "../../Api/Api";
 
 import { Card, CardHeader, CardBody } from "reactstrap";
@@ -20,6 +21,10 @@ import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { makeStyles } from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { randomInt, randomUserName } from "@material-ui/x-grid-data-generator";
+import { interval } from "rxjs";
+import { XGrid, useApiRef } from "@material-ui/x-grid";
 
 import Menu from "../Menu/index";
 import Player from "../Dashboard/Player/index";
@@ -43,9 +48,10 @@ import BD from "../../asserts/dogs/BD.png";
 import BKW from "../../asserts/dogs/BKW.png";
 import WF from "../../asserts/dogs/WF.png";
 
-export default function Corridas() {
+function Corridas({ isOpenHist, dispatch }) {
   const [listCorrida, setCorridas] = useState([]);
   const [listGalgos, setListGalgos] = useState([]);
+  const [listGalgosBetfair, setListGalgosBetfair] = useState([]);
   const [value, setValue] = useState(0);
 
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
@@ -71,9 +77,55 @@ export default function Corridas() {
     obterlista();
   }, []);
 
+  // useEffect(() => {
+  //   const interval = setInterval(async () => {
+  //     await obterdados();
+  //   }, 3000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, [listGalgosBetfair, obterdados]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  async function obterdados() {
+    const dados = await api.get("/listarMercado", {
+      params: {
+        id: listGalgos.idMarket,
+      },
+    });
+
+    setListGalgosBetfair(dados.data[0]);
+    verificarIsOPEN(listGalgosBetfair);
+  }
+
+  function verificarIsOPEN(listGalgosBetfair) {
+    console.log("entrouuuu " + listGalgosBetfair);
+    if (listGalgosBetfair) {
+      if (listGalgosBetfair.status === "OPEN") {
+        for (let dogBetfair in listGalgosBetfair.runners) {
+          for (let dogTable in listGalgos.dogs) {
+            if (
+              listGalgosBetfair.runners[dogBetfair].selectionId ===
+              listGalgos.dogs[dogTable].idDogBetfair
+            ) {
+              Object.assign(
+                listGalgos.dogs[dogTable],
+                listGalgosBetfair.runners[dogBetfair]["ex"]
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+
   const handleMarketID = (item) => {
     setListGalgos(item);
   };
+
+  // const canOpen = (value) => {
+  //   console.log(value);
+  //   setIsOpenHist(value);
+  // };
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -94,9 +146,32 @@ export default function Corridas() {
     );
   }
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
+
+  // const theme = createMuiTheme({
+  //   overrides: {
+  //     // Style sheet nam
+  //     MuiTable: {
+  //       // Name of the rule
+  //       root: {},
+  //     },
+  //     MuiTableHead: {
+  //       root: {
+  //         background: "white",
+  //         padding: "100px",
+  //       },
+  //     },
+  //     MuiTableRow: {
+  //       root: {
+  //         background: "red",
+  //         padding: "10px",
+  //         width: "100%",
+  //         height: "100%",
+  //       },
+  //     },
+  //   },
+  // });
 
   const useRowStyles = makeStyles((theme) => ({
     root: {
@@ -105,18 +180,59 @@ export default function Corridas() {
       },
       padding: "0 30px",
     },
+    conteinerTabela: {
+      margin: "10px 20px",
+      height: "auto",
+    },
+    cardTable: {
+      padding: "0px 0px",
+    },
+    table: {
+      // // background: "#222c3b",
+      // padding: "18px 10px",
+      // background: "red",
+      // height: "20px",
+      // width: "30px",
+    },
   }));
   const classes = useRowStyles();
 
-  function Rows(props) {
-    const { dog } = props;
-    const [open, setOpen] = React.useState(false);
+  useEffect(() => {
+    const subscription = interval(5000).subscribe(async () => {
+      if (listGalgos.length !== 0) {
+        await obterdados();
+      }
+    });
+    return () => {
+      // console.log(subscription.unsubscribe());
+      subscription.unsubscribe();
+    };
+  }, [listGalgos, obterdados]);
+
+  const testeValorfora = (value) => {
+    dispatch(toggleHist(value));
+  };
+
+  function toggleHist(isOpenHist) {
+    return {
+      type: "SET_HIST_OPEN",
+      isOpenHist,
+    };
+  }
+  function Rows(dados) {
+    const { dog } = dados;
+    const [open, setOpen] = useState(dog.aberto);
+    const openHist = (dog, open) => {
+      Object.assign(dog, (dog["aberto"] = open));
+      setOpen(open);
+    };
     return (
       <React.Fragment>
         <TableRow key={dog}>
+          {/* {console.log("OPEN " + JSON.stringify(dog))} */}
           <TableCell>
-            <IconButton size="medium" onClick={() => setOpen(!open)}>
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            <IconButton size="medium" onClick={() => openHist(dog, !open)}>
+              {dog.aberto ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="row">
@@ -130,7 +246,7 @@ export default function Corridas() {
           <TableCell>{dog.peso}</TableCell>
           <TableCell>{dog.analitico.overall}</TableCell>
           <TableCell>{dog.analitico.Favorito}</TableCell>
-          <TableCell>{dog.resultado}</TableCell>
+          {/* <TableCell>{dog.resultado}</TableCell> */}
           <TableCell>{dog.analitico.topTime}</TableCell>
           <TableCell>{dog.analitico.mediaPosicao}</TableCell>
           <TableCell>{dog.analitico.ultimoTempo}</TableCell>
@@ -140,10 +256,40 @@ export default function Corridas() {
           <TableCell>{dog.analitico.recupMedia}</TableCell>
           <TableCell>{dog.brt}</TableCell>
           <TableCell>{dog.top_speed}</TableCell>
+          {/* <TableCell>
+            {dog.availableToLay ? (
+              <TableCell>
+                {((1 / dog.availableToLay[0].price) * 100)
+                  .toFixed(2)
+                  .toString() + " %"}
+              </TableCell>
+            ) : (
+              0
+            )}
+          </TableCell> */}
+          {dog.availableToBack ? (
+            <TableCell>
+              {Object.keys(dog.availableToBack).length !== 0
+                ? dog.availableToBack[0].price
+                : 0}
+            </TableCell>
+          ) : (
+            <TableCell>0</TableCell>
+          )}
+
+          {dog.availableToLay ? (
+            <TableCell>
+              {Object.keys(dog.availableToLay).length !== 0
+                ? dog.availableToLay[0].price
+                : 0}
+            </TableCell>
+          ) : (
+            <TableCell>0</TableCell>
+          )}
         </TableRow>
         <TableRow>
-          <TableCell colSpan={20}>
-            <Collapse in={open} timeout="auto">
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={20}>
+            <Collapse in={dog.aberto} timeout="auto">
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
                   Historico
@@ -212,8 +358,8 @@ export default function Corridas() {
       </div>
 
       {/* {loading ? ( */}
-      <div classes={classes.root}>
-        <Paper className="tab-dados">
+      <div className={classes.conteinerTabela}>
+        <Paper>
           <Tabs value={value} onChange={handleChange} centered>
             <Tab label="Analíse" />
             <Tab label="Simulação" />
@@ -221,9 +367,9 @@ export default function Corridas() {
           </Tabs>
         </Paper>
         <TabPanel value={value} index={0}>
-          <TableContainer component={Paper} className="table-responsive">
-            <Table padding="none" size="medium">
-              <TableHead>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead className={classes.table}>
                 <TableRow>
                   <TableCell />
                   <TableCell>Trap</TableCell>
@@ -233,7 +379,7 @@ export default function Corridas() {
                   <TableCell>Peso</TableCell>
                   <TableCell>Rating</TableCell>
                   <TableCell>Favorito</TableCell>
-                  <TableCell>Resultado</TableCell>
+                  {/* <TableCell>Resultado</TableCell> */}
                   <TableCell>Top Time</TableCell>
                   <TableCell>M. Pos</TableCell>
                   <TableCell>U. Pos</TableCell>
@@ -243,6 +389,9 @@ export default function Corridas() {
                   <TableCell>Recup. Media</TableCell>
                   <TableCell>BRT</TableCell>
                   <TableCell>Top Speed</TableCell>
+                  {/* <TableCell>Probabilidade</TableCell> */}
+                  <TableCell>ODD Back</TableCell>
+                  <TableCell>ODD Lay</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -282,3 +431,4 @@ export default function Corridas() {
     </div>
   );
 }
+export default connect((state) => ({ isOpenHist: state }))(Corridas);

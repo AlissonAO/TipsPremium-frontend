@@ -66,7 +66,7 @@ export default function Player() {
               </div>
               <div className="item-player">
                 <ReactPlayer
-                  url="https://betamg-i.akamaihd.net/hls/live/513429/willhill/citywalkfeed/playlist.m3u8"
+                  url="https://betamg-i.akamaihd.net/hls/live/513429/willhill/0_tklzcakd_1_1/chunklist.m3u8"
                   controls
                   muted={true}
                   playing
