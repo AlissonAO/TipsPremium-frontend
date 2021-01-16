@@ -1,21 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Mada:400,500,600");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font: 400 14px Mada, sans-serif;
-    
-   }
-html{
-   background-color: black;
-   
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: 400 14px Mada, sans-serif;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+}
+html {
+  background-color: black;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.conteinerGlobal{
-   margin: 0;
-   padding: 0;
-  
-}
-
+/* .conteinerGlobal {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  max-width: max-content;
+  width: 100%;
+} */

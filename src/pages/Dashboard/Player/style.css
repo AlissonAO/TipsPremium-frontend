@@ -1,12 +1,10 @@
 .conteiner {
   margin: 10px 20px;
   border-radius: 50px;
-  height: auto;
 }
 
 .card-player {
   background-color: #242e3e;
-  margin: 1px 2px;
 }
 
 .card-action {
@@ -17,21 +15,23 @@
 .butum-expasion {
   color: red;
   width: 100px;
-  width: 100px;
 }
 .conteiner-video {
   display: flex;
   justify-content: center;
+  margin: 0px 0px;
+  background-color: #242e3e;
+  flex-direction: row;
 }
 
 .item-player {
-  margin: 10px;
+  margin: 0px;
   padding: 1%;
-  padding-top: 1%;
 }
 
 .player-wrapper {
   position: relative;
+
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
 }
 
@@ -39,4 +39,14 @@
   position: absolute;
   top: 10;
   left: 10;
+}
+
+@media screen and (max-width: 664px) {
+  .conteiner-video {
+    display: flex;
+    justify-content: center;
+    margin: 0px 0px;
+    background-color: #242e3e;
+    flex-direction: column;
+  }
 }

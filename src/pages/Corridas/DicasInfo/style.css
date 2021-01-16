@@ -1,0 +1,173 @@
+.conteinerDicas {
+  margin: 10px 20px 1px;
+  display: flex;
+}
+
+.conteinerCard {
+  width: 100%;
+  height: 150px;
+  margin: 0px 0px;
+}
+
+.card-dicas {
+  background: #222c3b;
+  margin: 0px 0px;
+  margin-bottom: 0px;
+
+  padding: 10px 25px;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid #151b24 !important;
+}
+
+.textoTrackDicas {
+  font-size: 25px;
+  font-weight: 600;
+  /* color: #c9d0d5; */
+  color: #ff9800;
+
+  margin: 10px;
+}
+
+.conteinertitulo {
+  display: flex;
+  justify-content: center;
+}
+.conteinerCorrida {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.conteinerTextoDicas {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.textoDicas {
+  font-size: 22px;
+  font-weight: 600;
+  color: #c9d0d5;
+  padding: 5px;
+  margin: 1.5px;
+}
+
+.textoGradeDicas {
+  font-size: 20px;
+  font-weight: 600;
+  color: #c9d0d5;
+  margin: 10px;
+  padding: 2px;
+}
+
+.lbl-card {
+  border-radius: 50px;
+  padding: 0px 15px;
+  color: #82cbc4;
+  display: inline-block;
+  /* background-color: #2196f3; */
+  /* background-color: #00adb5; */
+  width: 550px;
+  height: 25px;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 700;
+}
+.titulo-card {
+  border-radius: 50px;
+  padding: 0px 15px;
+  color: #82cbc4;
+  /* background-color: #4caf50; */
+  /* background-color: #00adb5; */
+  width: 550px;
+  height: 25px;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.imagen {
+  margin: 3px;
+  padding: 2.5px;
+}
+
+.conteinerImagens {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  padding: 5px;
+  width: 350px;
+  padding-left: 30px;
+}
+.conteinerDicasDetalhes {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.conteinerTodasImagens {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 664px) {
+  .conteinerDicas {
+    margin: 10px 20px 1px;
+    display: flex;
+    flex-direction: column;
+  }
+  .conteinerCard {
+    width: 100%;
+    height: 150px;
+    margin: 0px 0px;
+    display: flex;
+  }
+  .conteinerTextoDicas {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .textoDicas {
+    font-size: 16px;
+    font-weight: 600;
+    color: #c9d0d5;
+    padding: 3px;
+    width: 100px;
+  }
+
+  .conteinerImagens {
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+    padding: 5px;
+    width: 250px;
+    padding-left: 30px;
+  }
+
+  .imagen {
+    margin: 1px;
+    padding: 1.5px;
+  }
+
+  .textoTrackDicas {
+    font-size: 20px;
+    font-weight: 600;
+    /* color: #c9d0d5; */
+    color: #ff9800;
+
+    margin: 10px;
+    padding: 1px;
+  }
+
+  .textoGradeDicas {
+    font-size: 17px;
+    font-weight: 600;
+    color: #c9d0d5;
+    margin: 10px;
+    padding: 2px;
+  }
+}

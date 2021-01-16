@@ -1,28 +1,27 @@
-import socketio from 'socket.io-client'
+import socketio from "socket.io-client";
 
-const socket = socketio(process.env.REACT_APP_API_URL, {
-  autoConnect: false,
-  secure: false,
-})
+// const socket = socketio("http://localhost:8080", {
+// autoConnect: false,
+// secure: true,
+// });
 
-function subscriberDadosPista(subcribeFunction, id) {
-  console.log('ID Certo ' + id)
-  socket.on('mensagem', subcribeFunction)
+// function subscriberDadosPista(subcribeFunction) {
+//   console.log("ID Certo ");
+//   socket.on("mensagem", subcribeFunction);
+// }
+
+function connect() {
+  // socket.connect();
+  // socket.on("mensagem", (text) => {
+  //   console.log(text);
+  //   console.log("!nada");
+  // });
 }
 
-function connect(marketId) {
-  socket.io.opts.query = {
-    marketId,
-  }
-  socket.nsp = '/' + marketId
-  socket.connect()
-  socket.emit('cliente', marketId)
-}
+// function disconnect() {
+//   if (socket.connected) {
+//     socket.disconnect();
+//   }
+// }
 
-function disconnect() {
-  if (socket.connected) {
-    socket.disconnect()
-  }
-}
-
-export { connect, disconnect, subscriberDadosPista }
+// export { connect, disconnect };

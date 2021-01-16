@@ -5,7 +5,7 @@ import "./style.css";
 import Menu from "../Menu/index";
 // import Player from "../../pages/Dashboard/Player";
 
-import { connect, disconnect, subscriberDadosPista } from "../../Api/socket";
+// import { connect, disconnect, subscriberDadosPista } from "../../Api/socket";
 
 export default function DashBoard() {
   const [corrida, setCorrida] = useState([]);
@@ -16,15 +16,15 @@ export default function DashBoard() {
   //   subscriberDadosPista((dadosAposta) => setDadosAposta(dadosAposta), corrrida)
   // }, [corrrida])
 
-  const handleMarket = (item) => {
-    // for (let key in item.runners) {
-    // }
-    setclicou(true);
-    setCorrida(item);
-    // setListGalgosNome(item.runners)
-    //disconnect()
-    // connect(item.marketId)
-  };
+  // const handleMarket = (item) => {
+  //   // for (let key in item.runners) {
+  //   // }
+  //   setclicou(true);
+  //   setCorrida(item);
+  // setListGalgosNome(item.runners)
+  //disconnect()
+  // connect(item.marketId)
+  // };
 
   return (
     <div>

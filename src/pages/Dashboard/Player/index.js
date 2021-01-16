@@ -21,6 +21,8 @@ export default function Player() {
     expand: {
       transform: "rotate(0deg)",
       marginLeft: "auto",
+      marginTop: "0px",
+
       transition: theme.transitions.create("transform", {
         duration: theme.transitions.duration.shortest,
       }),
@@ -38,7 +40,10 @@ export default function Player() {
   return (
     <div className="conteiner">
       <Card className="card-player">
-        <CardActions className="card-action">
+        <CardActions
+          className="card-action"
+          style={{ paddingBottom: 0, paddingTop: 0 }}
+        >
           <Typography variant="body1" color="white">
             Corridas ao vivo
           </Typography>
@@ -46,7 +51,7 @@ export default function Player() {
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
             })}
-            size="medium"
+            size="small"
             onClick={handleExpandClick}
             aria-expanded={expanded}
           >
@@ -54,10 +59,14 @@ export default function Player() {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+          <CardContent
+            style={{ paddingBottom: 0, paddingTop: 0, background: "#222c3b" }}
+          >
             <div className="conteiner-video">
               <div className="item-player">
                 <ReactPlayer
+                  width={"100%"}
+                  height={"100%"}
                   url="https://betamg-i.akamaihd.net/hls/live/513429/willhill/citywalkfeed/playlist.m3u8"
                   controls
                   muted={true}
@@ -66,6 +75,8 @@ export default function Player() {
               </div>
               <div className="item-player">
                 <ReactPlayer
+                  width={"100%"}
+                  height={"100%"}
                   url="https://betamg-i.akamaihd.net/hls/live/513429/willhill/0_tklzcakd_1_1/chunklist.m3u8"
                   controls
                   muted={true}

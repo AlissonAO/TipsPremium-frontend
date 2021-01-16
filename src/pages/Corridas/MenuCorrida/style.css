@@ -1,29 +1,106 @@
-.conteinerMenuCorrida{
+.conteinerMenuCorrida {
+  margin: 10px 20px;
+  padding: 1x 1px;
+  background-color: #242e3e;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 664px) {
+  .conteinerMenuCorrida {
     margin: 10px 20px;
-    padding: 1x 1px;
-    background-color:#242e3e;
+    padding: 0x 0px;
+    background-color: #242e3e;
     border-radius: 5px;
-    height: auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
- 
-}
+    height: auto;
+    width: auto;
+  }
 
-.card-corrida{
-    transition: all 0.5s ease-in-out;
-    box-shadow:  0 1px 20px 0 rgba(0,0,0,.08);
+  .card-corrida > div {
     border-right: 1px solid black !important;
+    border-bottom: 1px solid black !important;
+    flex: 1 1 80px;
+    height: auto;
+  }
+
+  .textoCorrida {
+    /* color: #adb7be; */
+    font-size: 5px;
+  }
+
+  .textoTrack {
+    font-size: 7px;
+    text-align: center;
+  }
 }
 
-.card-body-corridas{
-    padding: 1px 1px;
-    padding-right: 5px;
+.card-corrida {
+  border-right: 1px solid black !important;
+  width: auto;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 1 1 100px;
+  box-shadow: 0px 4px 8px 0px rgba(229, 226, 226, 0.2);
+  transition: 0.3s;
 }
-.textoCorrida{
-    padding: 10px 10px;
-    background-color:transparent;
-    color: #adb7be;
-    font-size: 16px;
-    line-height: 1.2
+
+.card-corrida:hover {
+  box-shadow: 0px 4px 8px 0px rgba(229, 226, 226, 0.377);
+}
+
+.conteiner-track {
+  display: flex;
+  align-content: center;
+  padding: 0px;
+  margin: 0px;
+}
+.textoTrack {
+  padding: 10px;
+  background-color: transparent;
+  /* color: #c9d0d5 !important; */
+  font-size: 16px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+.conteiner-corrida {
+  display: flex;
+  justify-content: center;
+}
+
+.colorTexto {
+  /* color: #82cbc4; */
+  color: #adb7be;
+}
+
+.textoCorrida {
+  padding: 5px;
+  background-color: transparent;
+  color: #adb7be;
+  font-size: 15px;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.conteiner-hora {
+  display: flex;
+  justify-content: center;
+}
+.textohora {
+  padding: 10px;
+
+  border-radius: 5px;
+  color: #82cbc4;
+  font-size: 17px;
+  text-align: center;
+  padding-bottom: 3px;
+  margin-bottom: 7px;
 }

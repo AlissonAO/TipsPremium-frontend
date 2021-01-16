@@ -4,11 +4,9 @@ import Tabela from "../Tabela/index";
 import { Button, Card, CardHeader, CardBody } from "reactstrap";
 
 import api from "../../../Api/Api";
-import { Redirect } from "react-router-dom";
 
 export default function MenuCorrida(props) {
   const [click, setClick] = useState(false);
-  // console.log(props);
 
   const [listCorrida, setCorridas] = useState([]);
   // const [contador, setContador] = useState(0)
@@ -17,14 +15,27 @@ export default function MenuCorrida(props) {
   //         setContador(contador + 1)
   // }
 
+  async function obterlista() {
+    const response = await api.get("/listarCorridas");
+    // subscriberDadosPista((dadosAposta) => setCorridas(dadosAposta));
+
+    setCorridas(response.data);
+  }
+  // UseEffect para as corridas
   useEffect(() => {
-    async function obterlista() {
-      const response = await api.get("/listarCorridas");
-      console.log(response.data);
-      setCorridas(response.data);
+    // if (habitarPredicator) {
+    if (listCorrida.length === 0) {
+      obterlista();
+    } else {
+      const interval = setInterval(async () => {
+        obterlista();
+      }, 60000);
+      return () => {
+        clearInterval(interval);
+      };
+      // }
     }
-    obterlista();
-  }, []);
+  }, [listCorrida.length]);
 
   const handleMarketID = (item) => {
     props.obterIdMarket(item);
@@ -33,16 +44,20 @@ export default function MenuCorrida(props) {
   return (
     <div className="conteinerMenuCorrida">
       {listCorrida.map((item) => (
-        <div onClick={() => handleMarketID(item)}>
-          <Card className="card-corrida">
-            <CardBody className="card-body-corridas">
-              <h1 className="textoCorrida">{item.Grade} </h1>
-              <h1 className="textoCorrida">{item.HoraCorridaBR} </h1>
-            </CardBody>
-          </Card>
-        </div>
+        <Card
+          className="card-corrida cardMenu:hover"
+          onClick={() => handleMarketID(item)}
+        >
+          <div>
+            <h1 className="textoTrack colorTexto">{item.TrackName} </h1>
+            <div className="conteiner-corrida">
+              <h1 className="textoCorrida colorTexto">{item.Grade}</h1>
+              <h1 className="textoCorrida colorTexto">{item.Dis + "m"} </h1>
+            </div>
+            <h1 className="textohora colorTexto">{item.HoraCorridaBR} </h1>
+          </div>
+        </Card>
       ))}
-      <div></div>
     </div>
   );
 }

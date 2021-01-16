@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
 
-import "./style.css";
-import background from "../../asserts/predicator/background.png";
-import cup from "../../asserts/predicator/cup.png";
+import "./index.css";
+import background from "./img/background.png";
+import cup from "./img/cup.png";
 
 const LuckyDip = (props) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -122,16 +122,16 @@ const LuckyDip = (props) => {
         <div className="trap-won">
           Your Lucky Dip selection
           <br />
-          is Trap <div className="won-trap-no">1</div>
+          is Trap <div className="won-trap-no">0</div>
         </div>
-        <div className="trap-name">1</div>
+        <div className="trap-name">0</div>
         <div className="bet-now">Bet Now at</div>
         <a
           target="_blank"
           href="/out.php?lt=spc&amp;url=1"
           className="trap-odds"
         >
-          1
+          0
         </a>
         <div
           className="race-re-watch"
