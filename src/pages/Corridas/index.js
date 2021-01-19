@@ -8,7 +8,6 @@ import Player from "../Dashboard/Player/index";
 import MenuCorrida from "../Corridas/MenuCorrida/index";
 import Dicas from "../Corridas/DicasInfo/index";
 import Tabela from "../Corridas/Tabela/index";
-import LuckyDip from "../../pages/predicator/index";
 function Corridas({ isOpenHist, dispatch }) {
   const [corrida, setCorrida] = useState("");
 
@@ -21,12 +20,13 @@ function Corridas({ isOpenHist, dispatch }) {
       <div className="conteinerGlobal">
         <MenuCorrida obterIdMarket={handleMarket}></MenuCorrida>
         <Player></Player>
-        <Dicas valores={corrida}></Dicas>
-        <Tabela corrida={corrida}></Tabela>
+        {corrida !== "" ? (
+          <>
+            <Dicas valores={corrida}></Dicas>
+            <Tabela corrida={corrida}></Tabela>
+          </>
+        ) : null}
       </div>
-      {/* <div>
-        <LuckyDip></LuckyDip>
-      </div> */}
     </>
   );
 }

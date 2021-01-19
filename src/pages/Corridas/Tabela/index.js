@@ -5,7 +5,6 @@ import { connect, disconnect, subscriberDadosPista } from "../../../Api/socket";
 
 import { addDays, format } from "date-fns";
 import pt from "date-fns/locale/pt-BR";
-import { Card, CardHeader, CardBody } from "reactstrap";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -53,6 +52,7 @@ import BD from "../../../asserts/dogs/BD.png";
 import BKW from "../../../asserts/dogs/BKW.png";
 import WF from "../../../asserts/dogs/WF.png";
 import ptBR from "date-fns/locale/pt-BR";
+import { reduceHooks } from "react-table";
 
 function Corridas(props) {
   const [listCorrida, setCorridas] = useState([]);
@@ -110,7 +110,7 @@ function Corridas(props) {
       if (listGalgosBetfair !== []) {
         const interval = setInterval(async () => {
           obterdados();
-        }, 1555000);
+        }, 15000);
         return () => {
           clearInterval(interval);
         };
@@ -271,7 +271,7 @@ function Corridas(props) {
     },
   });
 
-  const useRowStyles = makeStyles((theme) => ({
+  const useRowStyles = makeStyles((props) => ({
     root: {
       "& > *": {
         borderBottom: "unset",
@@ -286,27 +286,43 @@ function Corridas(props) {
       padding: "0px 0px",
     },
     oddback: {
-      color: "#47a44b",
+      color: "#98fb98",
       fontWeight: "500",
       fontSize: "16px",
     },
     oddlay: {
-      color: "white",
+      color: "#f7bfb4",
       fontWeight: "500",
       fontSize: "16px",
     },
     favorito: {
       fontWeight: "900",
       fontSize: "17px",
-      color: "#e3e8eb",
+      color: (props) => props.color,
+      // color: "#e3e8eb",
     },
     rating: {
       fontWeight: "900",
       fontSize: "17px",
       color: "#e3e8eb",
     },
+    probabilidade: {
+      paddingTop: "30px",
+      paddingRigth: "5px",
+      marginTop: "10px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
+      color: "white",
+      textAlign: "center",
+      whiteSpace: "nowrap",
+      backgroundColor: "#27619b",
+      fontWeight: "500",
+      fontSize: "15px",
+      borderRadius: "3px",
+    },
   }));
-  const classes = useRowStyles();
+  const classes = useRowStyles(props);
 
   function ObterODD(dog, mercado) {
     if (
@@ -344,6 +360,36 @@ function Corridas(props) {
     }
   }
 
+  function ObterProbabilidade(dog) {
+    if (listGalgosBetfair !== undefined) {
+      if (
+        listGalgosBetfair.length !== 0 &&
+        listGalgosBetfair.runners.length !== 0
+      ) {
+        let retorno = listGalgosBetfair.runners.find(
+          (valor) => valor.selectionId === dog.idDogBetfair
+        );
+        if (typeof retorno !== "undefined") {
+          if (
+            retorno.ex.availableToLay !== "undefined" &&
+            retorno.ex.availableToLay.length !== 0
+          ) {
+            return ((1 / retorno.ex.availableToLay[0].price) * 100)
+              .toFixed(2)
+              .toString();
+          } else {
+            return "0.0";
+          }
+        } else {
+          return "Aguarde";
+        }
+      } else {
+        return "Aguarde";
+      }
+    } else {
+      return "Aguarde";
+    }
+  }
   const dataFormata = (data) => {
     return format(addDays(new Date(data), 1), "dd 'de' MMMM", {
       locale: ptBR,
@@ -375,14 +421,16 @@ function Corridas(props) {
           {/* <TableCell>
             <img src={corDogs[dog.cor]} alt={""} width={20} height={20}></img>
           </TableCell> */}
-          <TableCell align={"center"}>{dog.dogSex}</TableCell>
-          <TableCell align={"center"}>{dog.peso}</TableCell>
+          <TableCell align={"center"} className={classes.favorito}>
+            {dog.analitico.Favorito}
+          </TableCell>
           <TableCell align={"center"} classes={{ root: classes.rating }}>
             {dog.analitico.overall}
           </TableCell>
-          <TableCell align={"center"} classes={{ root: classes.favorito }}>
-            {dog.analitico.Favorito}
+          <TableCell align={"center"}>
+            {dog.dogSex === "B" ? "F" : "M"}
           </TableCell>
+          <TableCell align={"center"}>{dog.peso}</TableCell>
           {/* <TableCell>{dog.resultado}</TableCell> */}
           <TableCell align={"center"}>{dog.analitico.topTime}</TableCell>
           <TableCell align={"center"}>{dog.analitico.mediaPosicao}</TableCell>
@@ -393,17 +441,22 @@ function Corridas(props) {
           <TableCell align={"center"}>{dog.analitico.recupMedia}</TableCell>
           <TableCell align={"center"}>{dog.brt}</TableCell>
           <TableCell align={"center"}>{dog.top_speed}</TableCell>
-          {/* <TableCell>
-            {dog.availableToLay ? (
-              <TableCell>
-                {((1 / dog.availableToLay[0].price) * 100)
-                  .toFixed(2)
-                  .toString() + " %"}
-              </TableCell>
-            ) : (
-              0
-            )}
-          </TableCell> */}
+          <TableCell
+            className={classes.probabilidade}
+            style={{
+              width:
+                ObterProbabilidade(dog) !== "Aguarde"
+                  ? ObterProbabilidade(dog) * 2.5 + "px"
+                  : "0px",
+              height: "0px",
+            }}
+          >
+            {listGalgosBetfair !== undefined
+              ? ObterProbabilidade(dog) !== "Aguarde"
+                ? ObterProbabilidade(dog) + " %"
+                : ObterProbabilidade(dog)
+              : "Aguarde"}
+          </TableCell>
           <TableCell align={"center"} classes={{ root: classes.oddback }}>
             {listGalgosBetfair !== undefined
               ? ObterODD(dog, "BACK")
@@ -520,11 +573,11 @@ function Corridas(props) {
                     <TableCell />
                     <TableCell align={"center"}>Trap</TableCell>
                     <TableCell align={"center"}>Galgo</TableCell>
+                    <TableCell align={"center"}>Favorito</TableCell>
+                    <TableCell align={"center"}>Rating</TableCell>
                     {/* <TableCell>Cor</TableCell> */}
                     <TableCell align={"center"}>Sexo</TableCell>
                     <TableCell align={"center"}>Peso</TableCell>
-                    <TableCell align={"center"}>Rating</TableCell>
-                    <TableCell align={"center"}>Favorito</TableCell>
                     {/* <TableCell>Resultado</TableCell> */}
                     <TableCell align={"center"}>Top Time</TableCell>
                     <TableCell align={"center"}>M. Pos</TableCell>
@@ -535,7 +588,7 @@ function Corridas(props) {
                     <TableCell align={"center"}>Recup. Media</TableCell>
                     <TableCell align={"center"}>BRT</TableCell>
                     <TableCell align={"center"}>Top Speed</TableCell>
-                    {/* <TableCell>Probabilidade</TableCell> */}
+                    <TableCell align={"center"}>Probabilidade</TableCell>
                     <TableCell align={"center"}>ODD Back</TableCell>
                     <TableCell align={"center"}>ODD Lay</TableCell>
                   </TableRow>
@@ -551,7 +604,10 @@ function Corridas(props) {
             </TableContainer>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Predicator listGalgos={listGalgos}></Predicator>
+            <Predicator
+              listGalgos={listGalgos}
+              listBetfair={listGalgosBetfair}
+            ></Predicator>
           </TabPanel>
         </ThemeProvider>
       </div>

@@ -4,7 +4,6 @@ import styled, { keyframes, css } from "styled-components";
 import "./style.css";
 import background from "../../asserts/predicator/background.png";
 import cup from "../../asserts/predicator/cup.png";
-
 const LuckyDip = (props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [open, setOpen] = useState(false);
@@ -27,13 +26,40 @@ const LuckyDip = (props) => {
   //     }, 4000);
   //   }
   // }, [isClicked, objects, open]);
-  const example = keyframes`
+
+  function calcularPredicator(rating, id) {
+    if (props.listBetfair.runners !== undefined) {
+      let valor = props.listBetfair.runners.find(
+        (valor) => valor.selectionId === id
+      );
+      console.log(valor);
+      if (typeof valor !== "undefined") {
+        let final = rating / 2;
+        let retorno = Math.round(
+          (1 / valor.ex.availableToLay[0].price) * 100 + final
+        );
+        if (retorno <= 100) {
+          return Math.round(
+            (1 / valor.ex.availableToLay[0].price) * 100 + final
+          );
+        } else {
+          retorno = 85;
+        }
+      } else {
+        return rating;
+      }
+    } else {
+      return rating;
+    }
+  }
+
+  const rabbit = keyframes`
     0%   {left: 0;}
     100% {left: 90%;}
     `;
   const animatedStyle = (props) =>
     css`
-      ${example} 3s 1s both
+      ${rabbit} 3s 1s both
     `;
   const AnimatedObeject = styled.div`
     animation: ${animatedStyle};
@@ -44,11 +70,13 @@ const LuckyDip = (props) => {
   let AnimatedObeject4 = AnimatedObeject;
   let AnimatedObeject5 = AnimatedObeject;
   let AnimatedObeject6 = AnimatedObeject;
-  console.log(props.listGalgos);
   if (props.listGalgos) {
     const example1 = keyframes`
         0%   {left: 0;}
-        100% {left: ${props.listGalgos.dogs[0]["analitico"]["overall"]}%;}
+        100% {left: ${calcularPredicator(
+          props.listGalgos.dogs[0]["analitico"]["overall"],
+          props.listGalgos.dogs[0].idDogBetfair
+        )}%;}
         `;
     const animatedStyle1 = (props) =>
       css`
@@ -59,7 +87,10 @@ const LuckyDip = (props) => {
     `;
     const example2 = keyframes`
         0%   {left: 0;}
-        100% {left: ${props.listGalgos.dogs[1]["analitico"]["overall"]}%;}
+        100% {left: ${calcularPredicator(
+          props.listGalgos.dogs[1]["analitico"]["overall"],
+          props.listGalgos.dogs[1].idDogBetfair
+        )}%;}
         `;
     const animatedStyle2 = (props) =>
       css`
@@ -70,7 +101,10 @@ const LuckyDip = (props) => {
     `;
     const example3 = keyframes`
         0%   {left: 0;}
-        100% {left: ${props.listGalgos.dogs[2]["analitico"]["overall"]}%;}
+        100% {left: ${calcularPredicator(
+          props.listGalgos.dogs[2]["analitico"]["overall"],
+          props.listGalgos.dogs[2].idDogBetfair
+        )}%;}
         `;
     const animatedStyle3 = (props) =>
       css`
@@ -81,7 +115,10 @@ const LuckyDip = (props) => {
     `;
     const example4 = keyframes`
         0%   {left: 0;}
-        100% {left: ${props.listGalgos.dogs[3]["analitico"]["overall"]}%;}
+        100% {left: ${calcularPredicator(
+          props.listGalgos.dogs[3]["analitico"]["overall"],
+          props.listGalgos.dogs[3].idDogBetfair
+        )}%;}
         `;
     const animatedStyle4 = (props) =>
       css`
@@ -92,7 +129,10 @@ const LuckyDip = (props) => {
     `;
     const example5 = keyframes`
         0%   {left: 0;}
-        100% {left: ${props.listGalgos.dogs[4]["analitico"]["overall"]}%;}
+        100% {left: ${calcularPredicator(
+          props.listGalgos.dogs[4]["analitico"]["overall"],
+          props.listGalgos.dogs[4].idDogBetfair
+        )}%;}
         `;
     const animatedStyle5 = (props) =>
       css`
@@ -103,7 +143,10 @@ const LuckyDip = (props) => {
     `;
     const example6 = keyframes`
         0%   {left: 0;}
-        100% {left: ${props.listGalgos.dogs[5]["analitico"]["overall"]}%;}
+        100% {left: ${calcularPredicator(
+          props.listGalgos.dogs[5]["analitico"]["overall"],
+          props.listGalgos.dogs[5].idDogBetfair
+        )}%;}
         `;
     const animatedStyle6 = (props) =>
       css`
@@ -155,6 +198,7 @@ const LuckyDip = (props) => {
       </div>
     </div>
   );
+  console.log(props.listGalgos.dogs);
   return (
     <div className="conteinerPredicator">
       <div style={{ maxWidth: "800px", position: "relative" }}>
