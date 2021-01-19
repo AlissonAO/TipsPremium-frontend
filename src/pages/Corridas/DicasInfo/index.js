@@ -27,17 +27,11 @@ export default function Dicas(props) {
               <p className="textoDicas">Post Pick</p>
             </div>
             <div className="conteinerTodasImagens">
-              {props.valores.PostPick ? (
+              {props.valores.Favoritos ? (
                 <div className="conteinerImagens">
                   <div className="imagen">
                     <img
-                      src={
-                        imagens[
-                          parseInt(
-                            new String(props.valores.PostPick).substring(0)
-                          )
-                        ]
-                      }
+                      src={imagens[props.valores.Favoritos[0]]}
                       alt={""}
                       width={20}
                       height={20}
@@ -45,13 +39,7 @@ export default function Dicas(props) {
                   </div>
                   <div className="imagen">
                     <img
-                      src={
-                        imagens[
-                          parseInt(
-                            new String(props.valores.PostPick).substring(2)
-                          )
-                        ]
-                      }
+                      src={imagens[props.valores.Favoritos[1]]}
                       alt={""}
                       width={20}
                       height={20}
@@ -59,13 +47,7 @@ export default function Dicas(props) {
                   </div>
                   <div className="imagen">
                     <img
-                      src={
-                        imagens[
-                          parseInt(
-                            new String(props.valores.PostPick).substring(4)
-                          )
-                        ]
-                      }
+                      src={imagens[props.valores.Favoritos[2]]}
                       alt={""}
                       width={20}
                       height={20}
@@ -73,13 +55,7 @@ export default function Dicas(props) {
                   </div>
                   <div className="imagen">
                     <img
-                      src={
-                        imagens[
-                          parseInt(
-                            new String(props.valores.PostPick).substring(0)
-                          )
-                        ]
-                      }
+                      src={imagens[props.valores.Favoritos[3]]}
                       alt={""}
                       width={20}
                       height={20}
@@ -87,13 +63,7 @@ export default function Dicas(props) {
                   </div>
                   <div className="imagen">
                     <img
-                      src={
-                        imagens[
-                          parseInt(
-                            new String(props.valores.PostPick).substring(2)
-                          )
-                        ]
-                      }
+                      src={imagens[props.valores.Favoritos[4]]}
                       alt={""}
                       width={20}
                       height={20}
@@ -101,13 +71,7 @@ export default function Dicas(props) {
                   </div>
                   <div className="imagen">
                     <img
-                      src={
-                        imagens[
-                          parseInt(
-                            new String(props.valores.PostPick).substring(4)
-                          )
-                        ]
-                      }
+                      src={imagens[props.valores.Favoritos[5]]}
                       alt={""}
                       width={20}
                       height={20}
@@ -172,7 +136,7 @@ export default function Dicas(props) {
       <div className="conteinerCard">
         <Card className="card-dicas">
           <div className="conteinertitulo">
-            <p class="lbl-card">Informações da Corrida</p>
+            <p class="lbl-card">Corrida</p>
           </div>
           <div className="conteinerCorrida">
             <h3 className="textoTrackDicas">
@@ -193,12 +157,9 @@ export default function Dicas(props) {
       <div className="conteinerCard">
         <Card className="card-dicas">
           <div className="conteinertitulo">
-            <p class="lbl-card">Informações da Corrida</p>
+            <p class="lbl-card">Informações do Card</p>
           </div>
           <div className="conteinerCorrida">
-            <h3 className="textoTrackDicas">
-              {props.valores.TrackName ? props.valores.HoraCorridaBR : null}
-            </h3>
             <h3 className="textoTrackDicas">
               {props.valores.TrackName ? props.valores.TrackName : null}
             </h3>

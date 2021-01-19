@@ -6,7 +6,6 @@ import MenuCorrida from "./pages/Corridas/MenuCorrida/index";
 import Corrida from "./pages/Corridas/index";
 import Menu from "./pages/Menu/index";
 import { Provider } from "react-redux";
-import LuckyDip from "./LuckyDip/index";
 
 import store from "./store";
 
@@ -18,9 +17,8 @@ function App() {
       {/* <Provider store={store}> */}
       {/* <Router></Router> */}
       {/* <Dasboard></Dasboard> */}
-      <Menu></Menu>
+      {/* <Menu></Menu>*/}
       <Corrida></Corrida>
-      <LuckyDip></LuckyDip>
 
       {/* <Teste></Teste> */}
       {/* </Provider> */}

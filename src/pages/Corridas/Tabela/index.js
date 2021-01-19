@@ -3,8 +3,8 @@ import "./style.css";
 import api from "../../../Api/Api";
 import { connect, disconnect, subscriberDadosPista } from "../../../Api/socket";
 
-import { format } from "date-fns";
-import pt from "date-fns/locale/pt";
+import { addDays, format } from "date-fns";
+import pt from "date-fns/locale/pt-BR";
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -52,9 +52,9 @@ import WBK from "../../../asserts/dogs/WBK.png";
 import BD from "../../../asserts/dogs/BD.png";
 import BKW from "../../../asserts/dogs/BKW.png";
 import WF from "../../../asserts/dogs/WF.png";
+import ptBR from "date-fns/locale/pt-BR";
 
 function Corridas(props) {
-  console.log("Props" + JSON.stringify(props.corrida.idMarket));
   const [listCorrida, setCorridas] = useState([]);
   const [listGalgos, setListGalgos] = useState([]);
   const [listGalgosBetfair, setListGalgosBetfair] = useState([]);
@@ -110,7 +110,7 @@ function Corridas(props) {
       if (listGalgosBetfair !== []) {
         const interval = setInterval(async () => {
           obterdados();
-        }, 15000);
+        }, 1555000);
         return () => {
           clearInterval(interval);
         };
@@ -245,7 +245,7 @@ function Corridas(props) {
           borderBottom: "1px solid #1d2431",
           fontFamily: "Mada,sans-serif",
           fontSize: "15px",
-          padding: "10px",
+          padding: "3px",
           fontWeight: "900",
         },
       },
@@ -260,6 +260,12 @@ function Corridas(props) {
           fontSize: "25px",
           fontFamily: "Mada,sans-serif",
           fontWeight: "900",
+        },
+      },
+      MuiBox: {
+        root: {
+          margin: "0px",
+          padding: "3px",
         },
       },
     },
@@ -339,7 +345,9 @@ function Corridas(props) {
   }
 
   const dataFormata = (data) => {
-    return format(new Date(data), "dd 'de' MMMM", { locale: pt });
+    return format(addDays(new Date(data), 1), "dd 'de' MMMM", {
+      locale: ptBR,
+    });
   };
 
   function Rows(dados) {
@@ -409,7 +417,20 @@ function Corridas(props) {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={20}>
             <Collapse in={dog.aberto} timeout="auto">
               <Box margin={0}>
-                <Typography variant={"h6"}>Historico</Typography>
+                <Typography
+                  variant={"h6"}
+                  align={"center"}
+                  style={{ paddingTop: 1, color: "#ff9800" }}
+                >
+                  Historico
+                </Typography>
+                <Typography>
+                  <div className="conteiner-Historico">
+                    <div>Data de Nasc: {dog.dataNasc}</div>
+                    <div>{dog.qtdSemCorre} dia(s) sem correr</div>
+                  </div>
+                </Typography>
+
                 <Table>
                   <TableHead>
                     <TableRow>
@@ -490,11 +511,8 @@ function Corridas(props) {
             {/* <Tab label="AvB" /> */}
           </Tabs>
         </Paper>
-        {/* <div>
-          <Dicas valores={listGalgos}></Dicas>
-        </div> */}
-        <TabPanel value={value} index={0}>
-          <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <TabPanel value={value} index={0}>
             <TableContainer component={Paper}>
               <Table className={classes.table}>
                 <TableHead>
@@ -531,14 +549,11 @@ function Corridas(props) {
                 </TableBody>
               </Table>
             </TableContainer>
-          </ThemeProvider>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {/* <Predicator
-            listGalgos={listGalgos}
-            listGalgosBetfair={listGalgosBetfair}
-          ></Predicator> */}
-        </TabPanel>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Predicator listGalgos={listGalgos}></Predicator>
+          </TabPanel>
+        </ThemeProvider>
       </div>
       {/* ) : (
         <LoadingOverlay

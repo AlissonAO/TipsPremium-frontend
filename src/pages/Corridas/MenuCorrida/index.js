@@ -18,7 +18,7 @@ export default function MenuCorrida(props) {
   async function obterlista() {
     const response = await api.get("/listarCorridas");
     // subscriberDadosPista((dadosAposta) => setCorridas(dadosAposta));
-
+    console.log(response.data);
     setCorridas(response.data);
   }
   // UseEffect para as corridas

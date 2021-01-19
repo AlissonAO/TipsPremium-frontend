@@ -8,7 +8,7 @@ import Player from "../Dashboard/Player/index";
 import MenuCorrida from "../Corridas/MenuCorrida/index";
 import Dicas from "../Corridas/DicasInfo/index";
 import Tabela from "../Corridas/Tabela/index";
-import LuckyDip from "../../LuckyDip/index";
+import LuckyDip from "../../pages/predicator/index";
 function Corridas({ isOpenHist, dispatch }) {
   const [corrida, setCorrida] = useState("");
 
