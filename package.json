@@ -26,6 +26,7 @@
     "deploy": "aws s3 sync build/ s3://premiuntips --acl public-read"
   },
   
+  
   "browserslist": {
     "production": [
       ">0.2%",
