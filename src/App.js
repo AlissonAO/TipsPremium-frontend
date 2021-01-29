@@ -4,7 +4,7 @@ import Router from './routes'
 
 function App() 
 {
-  document.title = 'Tips'
+ 
   return (
     <div className="conteinerGlobal" >
       <Router></Router>
