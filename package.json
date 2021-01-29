@@ -25,9 +25,7 @@
     "eject": "react-scripts eject",
     "deploy": "aws s3 sync build/ s3://premiuntips --acl public-read"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
+  
   "browserslist": {
     "production": [
       ">0.2%",
