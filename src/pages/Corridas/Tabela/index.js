@@ -4,7 +4,6 @@ import api from "../../../Api/Api";
 import { connect, disconnect, subscriberDadosPista } from "../../../Api/socket";
 
 import { addDays, format } from "date-fns";
-import pt from "date-fns/locale/pt-BR";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -21,18 +20,11 @@ import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  withStyles,
-} from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import LoadingOverlay from "react-loading-overlay";
+import swal from "sweetalert";
 
-import Menu from "../../Menu/index";
-import Player from "../../Dashboard/Player/index";
 import Predicator from "../../predicator/index";
-import MenuCorrida from "../../Corridas/MenuCorrida/index";
-import Dicas from "../../Corridas/DicasInfo/index";
 
 import trap1 from "../../../asserts/trap/1.png";
 import trap2 from "../../../asserts/trap/2.png";
@@ -52,7 +44,6 @@ import BD from "../../../asserts/dogs/BD.png";
 import BKW from "../../../asserts/dogs/BKW.png";
 import WF from "../../../asserts/dogs/WF.png";
 import ptBR from "date-fns/locale/pt-BR";
-import { reduceHooks } from "react-table";
 
 function Corridas(props) {
   const [listCorrida, setCorridas] = useState([]);
@@ -60,9 +51,9 @@ function Corridas(props) {
   const [listGalgosBetfair, setListGalgosBetfair] = useState([]);
   const [value, setValue] = useState(0);
   const [habitarPredicator, sethabitarPredicator] = useState(true);
-  // const [loading, setLoading] = useState(false);
-  const [listodd, setListODD] = useState([]);
-  const [odd, setODD] = useState([]);
+  const [buscaCorrida, setBuscaCorrida] = useState(true);
+  const [loading, setLoading] = useState(false);
+  // console.log("lista betfair " + JSON.stringify(listGalgosBetfair));
 
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
   const corDogs = {
@@ -80,7 +71,9 @@ function Corridas(props) {
   useEffect(() => {
     setListGalgos(props.corrida);
     console.log(props.corrida);
-    // setLoading(true);
+    setListGalgosBetfair([]);
+    setBuscaCorrida(true);
+    setLoading(false);
   }, [props.corrida]); // eslint-disable-line
   // async function obterlista() {
   //   const response = await api.get("/listarCorridas");
@@ -106,10 +99,14 @@ function Corridas(props) {
 
   //UseEffect para as ODD da betfair
   useEffect(() => {
+    setLoading(true);
     if (habitarPredicator) {
       if (listGalgosBetfair !== []) {
+        console.log("Busnca api betfair");
         const interval = setInterval(async () => {
-          obterdados();
+          if (buscaCorrida) {
+            obterdados();
+          }
         }, 15000);
         return () => {
           clearInterval(interval);
@@ -123,13 +120,13 @@ function Corridas(props) {
     // verificarIsOPEN(listGalgosBetfair);
     // setListGalgosBetfair(teste.data[0]);
   }, [
+    buscaCorrida,
     habitarPredicator,
     listCorrida.length,
     listGalgos.length,
     listGalgosBetfair,
     obterdados,
   ]);
-  useEffect(() => {}, [odd]);
 
   // useEffect(() => {
   //   setODD([odd]);
@@ -141,41 +138,14 @@ function Corridas(props) {
         id: listGalgos.idMarket,
       },
     });
-    setListGalgosBetfair(dados.data[0]);
+    console.log(dados.data[0]);
+    if (dados.data[0]) {
+      setListGalgosBetfair(dados.data[0]);
+    } else {
+      setListGalgosBetfair([]);
+      setBuscaCorrida(false);
+    }
   }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // function verificarIsOPEN(listGalgosBetfair) {
-  //   if (listGalgosBetfair) {
-  //     if (listGalgosBetfair.status === "OPEN") {
-  //       console.log(listGalgosBetfair);
-  //       for (let dogBetfair in listGalgosBetfair.runners) {
-  //         for (let dogTable in listGalgos.dogs) {
-  //           if (
-  //             listGalgosBetfair.runners[dogBetfair].selectionId ===
-  //             listGalgos.dogs[dogTable].idDogBetfair
-  //           ) {
-  //             var teste = Object.assign(
-  //               listGalgos.dogs[dogTable],
-  //               listGalgosBetfair.runners[dogBetfair]["ex"]
-  //             );
-  //           }
-  //         }
-  //       }
-  //       console.log(teste);
-  //       setListGalgos(teste);
-  //     }
-  //   }
-  // }
-
-  const handleMarketID = (item) => {
-    setListGalgos(item);
-  };
-
-  // const canOpen = (value) => {
-  //   console.log(value);
-  //   setIsOpenHist(value);
-  // };
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -221,7 +191,9 @@ function Corridas(props) {
       MuiTableHead: {
         root: {
           background: "#82cbc4",
+          // background: "#363d47",
           padding: "10px",
+          color: "#000000",
         },
       },
       MuiTableRow: {
@@ -242,6 +214,7 @@ function Corridas(props) {
         },
         head: {
           color: "#263238",
+          // color: "white",
           borderBottom: "1px solid #1d2431",
           fontFamily: "Mada,sans-serif",
           fontSize: "15px",
@@ -281,6 +254,7 @@ function Corridas(props) {
     conteinerTabela: {
       margin: "0px 20px",
       height: "auto",
+      marginBottom: "25px",
     },
     cardTable: {
       padding: "0px 0px",
@@ -321,47 +295,40 @@ function Corridas(props) {
       fontSize: "15px",
       borderRadius: "3px",
     },
+
+    semProbabilidade: {
+      color: "#ff9800",
+      fontSize: "14px",
+    },
+    indisponivel: {
+      color: "#999999",
+      fontSize: "14px",
+    },
+
+    removido: {
+      color: "#FC4422",
+    },
+    vencedor: {
+      color: "#98fb98;",
+    },
+
+    valor: {
+      fontSize: "15px",
+      color: "#08CCAB",
+    },
   }));
   const classes = useRowStyles(props);
 
   function ObterODD(dog, mercado) {
-    if (
-      listGalgosBetfair.length !== 0 &&
-      listGalgosBetfair.runners.length !== 0
-    ) {
-      let retorno = listGalgosBetfair.runners.find(
-        (valor) => valor.selectionId === dog.idDogBetfair
+    if (listGalgos.idMarket === null) {
+      return (
+        <TableCell align={"center"} className={classes.indisponivel}>
+          indisponível
+        </TableCell>
       );
-      if (typeof retorno !== "undefined") {
-        if (mercado === "BACK") {
-          if (
-            retorno.ex.availableToBack !== "undefined" &&
-            retorno.ex.availableToBack.length !== 0
-          ) {
-            return retorno.ex.availableToBack[0].price;
-          } else {
-            return "0.0";
-          }
-        } else {
-          if (
-            retorno.ex.availableToLay !== "undefined" &&
-            retorno.ex.availableToLay.length !== 0
-          ) {
-            return retorno.ex.availableToLay[0].price;
-          } else {
-            return "0.0";
-          }
-        }
-      } else {
-        return "Aguarde";
-      }
-    } else {
-      return "Aguarde";
     }
-  }
 
-  function ObterProbabilidade(dog) {
-    if (listGalgosBetfair !== undefined) {
+    if (listGalgosBetfair !== [] && listGalgosBetfair !== undefined) {
       if (
         listGalgosBetfair.length !== 0 &&
         listGalgosBetfair.runners.length !== 0
@@ -370,25 +337,156 @@ function Corridas(props) {
           (valor) => valor.selectionId === dog.idDogBetfair
         );
         if (typeof retorno !== "undefined") {
-          if (
-            retorno.ex.availableToLay !== "undefined" &&
+          console.log("retono " + JSON.stringify(retorno));
+          if (listGalgosBetfair.status === "CLOSED") {
+            if (retorno.status === "WINNER") {
+              return (
+                <TableCell align={"center"} className={classes.vencedor}>
+                  {retorno.status}
+                </TableCell>
+              );
+            } else {
+              return (
+                <TableCell align={"center"} className={classes.removido}>
+                  {retorno.status}
+                </TableCell>
+              );
+            }
+          }
+          if (retorno.status === "REMOVED")
+            return (
+              <TableCell align={"center"} className={classes.removido}>
+                Removido
+              </TableCell>
+            );
+          if (mercado === "BACK") {
+            if (
+              retorno.ex.availableToBack !== "undefined" &&
+              retorno.ex.availableToBack.length !== 0
+            ) {
+              return retorno.ex.availableToBack[0].price;
+            } else {
+              return retorno.lastPriceTraded;
+            }
+          } else {
+            if (
+              retorno.ex.availableToLay !== "undefined" &&
+              retorno.ex.availableToLay.length !== 0
+            ) {
+              return retorno.ex.availableToLay[0].price;
+            } else {
+              return retorno.lastPriceTraded;
+            }
+          }
+        }
+      }
+    }
+    return (
+      <TableCell align={"center"} className={classes.semProbabilidade}>
+        Aguarde
+      </TableCell>
+    );
+  }
+
+  function ObterProbabilidade(dog) {
+    if (listGalgos.idMarket === null) {
+      return (
+        <TableCell align={"center"} className={classes.indisponivel}>
+          indisponível
+        </TableCell>
+      );
+    }
+
+    if (listGalgosBetfair !== [] && listGalgosBetfair !== undefined) {
+      if (
+        listGalgosBetfair.length !== 0 &&
+        listGalgosBetfair.runners.length !== 0
+      ) {
+        let retorno = listGalgosBetfair.runners.find(
+          (valor) => valor.selectionId === dog.idDogBetfair
+        );
+
+        if (typeof retorno !== "undefined") {
+          if (retorno.status === "REMOVED") {
+            return (
+              <TableCell
+                align={"center"}
+                className={classes.removido}
+              ></TableCell>
+            );
+          } else if (
+            retorno.ex.availableToLay !== undefined &&
             retorno.ex.availableToLay.length !== 0
           ) {
-            return ((1 / retorno.ex.availableToLay[0].price) * 100)
+            let v = ((1 / retorno.ex.availableToLay[0].price) * 100)
               .toFixed(2)
               .toString();
-          } else {
-            return "0.0";
+            v = v * 2.5 + "px";
+            return (
+              <TableCell
+                align={"center"}
+                className={classes.probabilidade}
+                style={{
+                  width: v,
+                  height: "0px",
+                }}
+              >
+                {((1 / retorno.ex.availableToLay[0].price) * 100)
+                  .toFixed(2)
+                  .toString() + " %"}
+              </TableCell>
+            );
           }
-        } else {
-          return "Aguarde";
         }
-      } else {
-        return "Aguarde";
       }
-    } else {
-      return "Aguarde";
     }
+    return (
+      <TableCell align={"center"} className={classes.semProbabilidade}>
+        Aguarde
+      </TableCell>
+    );
+  }
+
+  function valorInvestido(dog) {
+    if (listGalgos.idMarket === null) {
+      return (
+        <TableCell align={"center"} className={classes.indisponivel}>
+          indisponível
+        </TableCell>
+      );
+    }
+
+    if (listGalgosBetfair !== [] && listGalgosBetfair !== undefined) {
+      if (
+        listGalgosBetfair.length !== 0 &&
+        listGalgosBetfair.runners.length !== 0
+      ) {
+        let retorno = listGalgosBetfair.runners.find(
+          (valor) => valor.selectionId === dog.idDogBetfair
+        );
+        if (typeof retorno !== "undefined") {
+          if (retorno.status === "REMOVED")
+            return (
+              <TableCell
+                align={"center"}
+                className={classes.removido}
+              ></TableCell>
+            );
+          else if (retorno.totalMatched !== undefined) {
+            return (
+              <TableCell className={classes.valor} align={"center"}>
+                {retorno.totalMatched.toLocaleString("pt-BR")}
+              </TableCell>
+            );
+          }
+        }
+      }
+    }
+    return (
+      <TableCell align={"center"} className={classes.semProbabilidade}>
+        Aguarde
+      </TableCell>
+    );
   }
   const dataFormata = (data) => {
     return format(addDays(new Date(data), 1), "dd 'de' MMMM", {
@@ -408,7 +506,6 @@ function Corridas(props) {
     return (
       <React.Fragment>
         <TableRow key={dog}>
-          {/* {console.log("OPEN " + JSON.stringify(dog))} */}
           <TableCell>
             <IconButton size="medium" onClick={() => openHist(dog, !open)}>
               {dog.aberto ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -441,29 +538,15 @@ function Corridas(props) {
           <TableCell align={"center"}>{dog.analitico.recupMedia}</TableCell>
           <TableCell align={"center"}>{dog.brt}</TableCell>
           <TableCell align={"center"}>{dog.top_speed}</TableCell>
-          <TableCell
-            className={classes.probabilidade}
-            style={{
-              width:
-                ObterProbabilidade(dog) !== "Aguarde"
-                  ? ObterProbabilidade(dog) * 2.5 + "px"
-                  : "0px",
-              height: "0px",
-            }}
-          >
-            {listGalgosBetfair !== undefined
-              ? ObterProbabilidade(dog) !== "Aguarde"
-                ? ObterProbabilidade(dog) + " %"
-                : ObterProbabilidade(dog)
-              : "Aguarde"}
-          </TableCell>
+
+          {valorInvestido(dog)}
+
+          {ObterProbabilidade(dog)}
           <TableCell align={"center"} classes={{ root: classes.oddback }}>
-            {listGalgosBetfair !== undefined
-              ? ObterODD(dog, "BACK")
-              : "Aguarde"}
+            {ObterODD(dog, "BACK")}
           </TableCell>
           <TableCell align={"center"} classes={{ root: classes.oddlay }}>
-            {listGalgosBetfair !== undefined ? ObterODD(dog, "LAY") : "Aguarde"}
+            {ObterODD(dog, "LAY")}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -548,74 +631,77 @@ function Corridas(props) {
 
   return (
     <div>
-      {/* {loading ? ( */}
-      <div className={classes.conteinerTabela}>
-        <Paper
-          style={{ paddingBottom: 0, paddingTop: 0, background: "#222c3b" }}
-        >
-          <Tabs
-            TabIndicatorProps={{ style: { background: "#00acc1" } }}
-            value={value}
-            onChange={handleChange}
-            centered
+      {loading ? (
+        <div className={classes.conteinerTabela}>
+          <Paper
+            style={{ paddingBottom: 3, paddingTop: 0, background: "#222c3b" }}
           >
-            <Tab style={{ color: "white" }} label="Analíse" />
-            <Tab style={{ color: "white" }} label="Predictor" />
-            {/* <Tab label="AvB" /> */}
-          </Tabs>
-        </Paper>
-        <ThemeProvider theme={theme}>
-          <TabPanel value={value} index={0}>
-            <TableContainer component={Paper}>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell />
-                    <TableCell align={"center"}>Trap</TableCell>
-                    <TableCell align={"center"}>Galgo</TableCell>
-                    <TableCell align={"center"}>Favorito</TableCell>
-                    <TableCell align={"center"}>Rating</TableCell>
-                    {/* <TableCell>Cor</TableCell> */}
-                    <TableCell align={"center"}>Sexo</TableCell>
-                    <TableCell align={"center"}>Peso</TableCell>
-                    {/* <TableCell>Resultado</TableCell> */}
-                    <TableCell align={"center"}>Top Time</TableCell>
-                    <TableCell align={"center"}>M. Pos</TableCell>
-                    <TableCell align={"center"}>U. Pos</TableCell>
-                    <TableCell align={"center"}>M. Tempo</TableCell>
-                    <TableCell align={"center"}>Top Split</TableCell>
-                    <TableCell align={"center"}>M. Split</TableCell>
-                    <TableCell align={"center"}>Recup. Media</TableCell>
-                    <TableCell align={"center"}>BRT</TableCell>
-                    <TableCell align={"center"}>Top Speed</TableCell>
-                    <TableCell align={"center"}>Probabilidade</TableCell>
-                    <TableCell align={"center"}>ODD Back</TableCell>
-                    <TableCell align={"center"}>ODD Lay</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {listGalgos.dogs
-                    ? listGalgos.dogs.map((dog) => (
-                        <Rows key={dog.nome} dog={dog}></Rows>
-                      ))
-                    : null}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <Predicator
-              listGalgos={listGalgos}
-              listBetfair={listGalgosBetfair}
-            ></Predicator>
-          </TabPanel>
-        </ThemeProvider>
-      </div>
-      {/* ) : (
+            <Tabs
+              TabIndicatorProps={{
+                style: { background: "white", height: "2px" },
+              }}
+              value={value}
+              onChange={handleChange}
+              centered
+            >
+              <Tab style={{ color: "white" }} label="Analíse" />
+              <Tab style={{ color: "white" }} label="Predictor" />
+              {/* <Tab label="AvB" /> */}
+            </Tabs>
+          </Paper>
+          <ThemeProvider theme={theme}>
+            <TabPanel value={value} index={0}>
+              <TableContainer component={Paper}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell />
+                      <TableCell align={"center"}>Trap</TableCell>
+                      <TableCell align={"center"}>Galgo</TableCell>
+                      <TableCell align={"center"}>Favorito</TableCell>
+                      <TableCell align={"center"}>Rating</TableCell>
+                      {/* <TableCell>Cor</TableCell> */}
+                      <TableCell align={"center"}>Sexo</TableCell>
+                      <TableCell align={"center"}>Peso</TableCell>
+                      {/* <TableCell>Resultado</TableCell> */}
+                      <TableCell align={"center"}>Top Time</TableCell>
+                      <TableCell align={"center"}>M. Pos</TableCell>
+                      <TableCell align={"center"}>U. Pos</TableCell>
+                      <TableCell align={"center"}>M. Tempo</TableCell>
+                      <TableCell align={"center"}>Top Split</TableCell>
+                      <TableCell align={"center"}>M. Split</TableCell>
+                      <TableCell align={"center"}>Recup. Media</TableCell>
+                      <TableCell align={"center"}>BRT</TableCell>
+                      <TableCell align={"center"}>Top Speed</TableCell>
+                      <TableCell align={"center"}>Valor Investido</TableCell>
+                      <TableCell align={"center"}>Probabilidade</TableCell>
+                      <TableCell align={"center"}>FAVOR</TableCell>
+                      <TableCell align={"center"}>CONTRA</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {listGalgos.dogs
+                      ? listGalgos.dogs.map((dog) => (
+                          <Rows key={dog.nome} dog={dog}></Rows>
+                        ))
+                      : null}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Predicator
+                listGalgos={listGalgos}
+                listBetfair={listGalgosBetfair}
+              ></Predicator>
+            </TabPanel>
+          </ThemeProvider>
+        </div>
+      ) : (
         <LoadingOverlay
           active={!loading}
           spinner
-          text="Carregando os resultados..."
+          text="Carregando..."
           className="spinner"
           styles={{
             overlay: {
@@ -629,7 +715,7 @@ function Corridas(props) {
             },
           }}
         />
-      )} */}
+      )}
     </div>
   );
 }

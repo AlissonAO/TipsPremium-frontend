@@ -1,178 +1,165 @@
-import React, { useState } from 'react';
-import { Button, Card, CardHeader, CardBody } from 'reactstrap';
+import React, { useState } from "react";
+import { Button, Card, CardHeader, CardBody } from "reactstrap";
 import DatePicker from "react-datepicker";
-import api from '../../Api/Api';
-import './style.css';
+import api from "../../Api/Api";
+import "./style.css";
+import { withStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 // import { format, parseISO } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+import ptBR from "date-fns/locale/pt-BR";
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
-import LoadingOverlay from 'react-loading-overlay';
-
-
-
+import LoadingOverlay from "react-loading-overlay";
+import Menu from "../../pages/Menu/index";
 
 export default function ResultadoCorrida() {
-    // 
-    const [dateSelecionanda, setAutoClose] = useState(new Date());
-    const [loading, setLoading] = useState(true)
+  //
+  const [dateSelecionanda, setAutoClose] = useState(new Date());
+  const [loading, setLoading] = useState(true);
 
-    const [list, setList] = useState([]);
-    const [key, setKeys] = useState([])
+  const [list, setList] = useState([]);
+  const [key, setKeys] = useState([]);
 
-    async function carregarListar() {
-        setLoading(false);
-        const response = await api.get('/listarResultados', {
-            params: {
-                data: dateSelecionanda.toISOString()
-            }
-        }
-        )
+  async function carregarListar() {
+    setLoading(false);
+    const response = await api.get("/listarResultados", {
+      params: {
+        data: dateSelecionanda.toISOString(),
+      },
+    });
 
-        if (response.data.length === 0) {
-            setLoading(true);
-            return swal("Não há registro para essa data ", "", "info", {
-                className: "swal-footer",
-            }
-            );
-        } else {
-            setList(response.data)
-            setKeys(Object.keys(response.data[0]))
-
-        }
-        setLoading(true);
-
+    if (response.data.length === 0) {
+      setLoading(true);
+      return swal("Não há registro para essa data ", "", "info", {
+        className: "swal-footer",
+      });
+    } else {
+      setList(response.data);
+      setKeys(Object.keys(response.data[0]));
     }
+    setLoading(true);
+  }
 
-    const autoClosee = date => {
-        setAutoClose(date);
+  const autoClosee = (date) => {
+    setAutoClose(date);
+  };
 
-    }
+  function limpaTela() {
+    setList([]);
+    setAutoClose(new Date());
+    setKeys([]);
+  }
 
-    function limpaTela() {
-        setList([])
-        setAutoClose(new Date())
-        setKeys([])
+  // const formataData = (data) => {
+  //     // console.log(data)
+  //     // "H:mm:ss a"
+  //     const parsedDate = format(parseISO(data), "H:mm:ss a");
+  //     console.log(parsedDate.toLocaleString())
+  //     return parsedDate;
+  // }
 
+  const Rows = list.map((linha) => (
+    <tr key={linha}>
+      <td className="td-result">{linha.nomegalgo}</td>
+      <td className="td-result">{linha.datainicio}</td>
+      <td className="td-result">{linha.datafim}</td>
+      <td className="td-result">{linha.pista}</td>
+      <td className="td-result">{linha.grade}</td>
+      <td className="td-result">{linha.trap}</td>
+      <td className="td-result">{linha.odd_lay}</td>
+      <td className="td-result">{linha.odd_back}</td>
+      <td className="td-result">{linha.probabilidade}</td>
+      <td className="td-result">{linha["Total Galgo"]}</td>
+      <td className="td-result">{linha.win}</td>
+      <td className="td-result">{linha["Total da corrida"]}</td>
+    </tr>
+  ));
 
-    }
+  const DataPic = ({ title, children }) => (
+    <Card>
+      <CardHeader>
+        <h5>{title}</h5>
+      </CardHeader>
+      <CardBody className="card-body"> {children}</CardBody>
+    </Card>
+  );
 
-    // const formataData = (data) => {
-    //     // console.log(data)
-    //     // "H:mm:ss a"
-    //     const parsedDate = format(parseISO(data), "H:mm:ss a");
-    //     console.log(parsedDate.toLocaleString())
-    //     return parsedDate;
-    // }
-
-    const Rows = list.map(linha => (
-        <tr key={linha}>
-            <td>{linha.nomegalgo}</td>
-            <td>{linha.datainicio}</td>
-            <td>{linha.datafim}</td>
-            <td>{linha.pista}</td>
-            <td>{linha.grade}</td>
-            <td>{linha.trap}</td>
-            <td>{linha.odd_lay}</td>
-            <td>{linha.odd_back}</td>
-            <td>{linha.probabilidade}</td>
-            <td>{linha['Total Galgo']}</td>
-            <td>{linha.win}</td>
-            <td>{linha['Total da corrida']}</td>
-
-        </tr>
-    ))
-
-
-
-
-    const DataPic = ({ title, children }) => (
-        <Card>
-            <CardHeader>
-                <h5>{title}</h5>
-            </CardHeader>
-            <CardBody className="card-body"> {children}</CardBody>
-        </Card>
-    );
-
-    return (
-        <div className="conteiner-result" >
-
+  const BorderLinearProgress = withStyles((theme) => ({
+    root: {
+      width: "100%",
+      height: "2px",
+    },
+    colorPrimary: {
+      backgroundColor: "#0a0a0a",
+    },
+    bar: {
+      backgroundColor: "#4caf50",
+    },
+  }))(LinearProgress);
+  return (
+    <>
+      <Menu></Menu>
+      <div className="conteiner-result">
+        <div>
+          <span className="texto-batfair">Consultar resultado Betfair</span>
+          <div className="conteiner-texto">
+            <div className="conteiner-texto-data">
+              <span className="texto-data">Selecione a Data:</span>
+            </div>
             <div>
-                <Card className="card-data">
-                    <CardHeader>
-                        <h1>Consultar resultado Betfair</h1>
-                    </CardHeader>
-                    <CardBody className="card-body-data">
-                        <div className="texto-data">
-                            <h3>Selecione a Data:</h3>
-                        </div>
-                        <div>
-                            <DatePicker
-                                locale="ptBR"
-                                dateFormat="dd/MM/yyyy"
-                                selected={dateSelecionanda}
-                                onChange={dateSelecionanda => autoClosee(dateSelecionanda)}
-                                minDate={new Date('2020-07-19')}
-                                maxDate={new Date()}
-                                className="form-control"
-                            />
-                        </div>
-                    </CardBody>
-                    <div className="conteiner-pesquisar-button">
-                        <Button className="button" onClick={carregarListar}>Pesquisar</Button>
-                    </div>
-                    <div className="conteiner-clear-button">
-                        <Button onClick={limpaTela}>Limpa</Button>
-                    </div>
-                </Card>
+              <DatePicker
+                locale="ptBR"
+                dateFormat="dd/MM/yyyy"
+                selected={dateSelecionanda}
+                onChange={(dateSelecionanda) => autoClosee(dateSelecionanda)}
+                minDate={new Date("2020-07-19")}
+                maxDate={new Date()}
+                className="form-control"
+                popperModifiers={{
+                  offset: {
+                    enabled: true,
+                    offset: "1px, 5px",
+                  },
+                  preventOverflow: {
+                    enabled: true,
+                    escapeWithReference: false,
+                    boundariesElement: "viewport",
+                  },
+                }}
+              />
             </div>
-            <div >
-                {
-                    loading ? (
-                        <Card className="card-table ">
-                            <CardHeader className="card-table card-header-table">
-                            </CardHeader>
-                            <CardBody>
-                                <table className="table" >
-                                    <thead >
-                                        <tr>
-                                            {key.map((item) => <th key={item}>{item}</th>)}
-                                        </tr>
-                                    </thead>
-                                    <tbody className="card-table" >
-                                        {
-                                            Rows
-                                        }
-                                    </tbody>
-                                </table>
-                            </CardBody>
-
-                        </Card>
-
-                    ) : (
-                            <LoadingOverlay
-                                active={!loading}
-                                spinner
-                                text='Carregando os resultados...'
-                                className="spinner"
-                                styles={{
-                                    overlay: {
-                                        "background-color": "#1d2431",
-                                        "padding": "10px",
-                                    },
-                                    content: {
-                                        "font-size": "20px",
-                                        "margin-bottom": "10px",
-                                        "margin-right": "180px",
-                                    },
-                                }}
-                            />
-                        )
-                }
-
-            </div>
-
+          </div>
+          <div className="conteiner-pesquisar-button">
+            <Button className="button" onClick={carregarListar}>
+              Pesquisar
+            </Button>
+          </div>
+          <div className="conteiner-clear-button">
+            <Button onClick={limpaTela}>Limpa</Button>
+          </div>
         </div>
-    )
+        <div>
+          {loading ? (
+            <table className="table-result">
+              <thead>
+                <tr>
+                  {key.map((item) => (
+                    <th className="th-result" key={item}>
+                      {item}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="card-table">{Rows}</tbody>
+            </table>
+          ) : (
+            <div>
+              <BorderLinearProgress variant="indeterminate" value={loading} />
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
 }

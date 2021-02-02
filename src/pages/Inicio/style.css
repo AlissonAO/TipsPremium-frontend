@@ -1,34 +1,37 @@
-.conteiner-logon{
-    height: 99vh;
-    width:  auto;
-    padding: 0px;
-    background: linear-gradient(+45deg , transparent ,  rgb(46, 46, 46) 90% ), 
-        url("../../asserts/imagem.jpg")  ;
-    background-size: cover;
-    filter: saturate(110%);
-    filter: brightness(120%);
+.conteiner-logon {
+  height: 99vh;
+  width: auto;
+  padding: 0px;
+  background: linear-gradient(+45deg, transparent, rgb(46, 46, 46) 90%),
+    url("../../asserts/imagem.jpg");
+  background-size: cover;
+  filter: saturate(110%);
+  filter: brightness(120%);
 }
 
-.conteiner-inicio{
-    width: 280px;
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
+.conteiner-inicio {
+  width: 280px;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-.btn-logon{
-    width: 250px;
-    float: left;
-    background: none;
-    border: 2px solid #4caf50;
-    color: white;
-    padding: 5px;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 12px 0;
-    text-decoration:none;
-  }
+.btn-logon {
+  width: 250px;
+  float: left;
+  background: none;
+  border: 2px solid #4caf50;
+  color: white;
+  padding: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 12px 0;
+  text-decoration: none;
+}
 
-  
+.texto {
+  color: aliceblue;
+  font: 400 50px Mada, sans-serif !important;
+}

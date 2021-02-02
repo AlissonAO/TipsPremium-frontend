@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState } from "react";
 import "./style.css";
-import api from "../../Api/Api";
-import { connect, disconnect, subscriberDadosPista } from "../../Api/socket";
+// import api from "../../Api/Api";
+// import { connect, disconnect, subscriberDadosPista } from "../../Api/socket";
 
 import Menu from "../Menu/index";
 import Player from "../Dashboard/Player/index";
@@ -18,12 +18,13 @@ function Corridas({ isOpenHist, dispatch }) {
   return (
     <>
       <div className="conteinerGlobal">
+        <Menu></Menu>
         <MenuCorrida obterIdMarket={handleMarket}></MenuCorrida>
         <Player></Player>
         {corrida !== "" ? (
           <>
             <Dicas valores={corrida}></Dicas>
-            <Tabela corrida={corrida}></Tabela>
+            <Tabela corrida={corrida} atualizar={true}></Tabela>
           </>
         ) : null}
       </div>

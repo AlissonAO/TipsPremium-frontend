@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Card, CardHeader, CardBody } from "reactstrap";
+import Countdown from "../Countdown/index";
 
 import "./style.css";
 
@@ -13,7 +14,7 @@ import trap6 from "../../../asserts/trap/6.png";
 
 export default function Dicas(props) {
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
-  console.log("Dicas" + props.valores);
+  console.log("Dicas" + JSON.stringify(props.valores.Favoritos));
   return (
     <div className="conteinerDicas">
       <div className="conteinerCard">
@@ -70,12 +71,14 @@ export default function Dicas(props) {
                     ></img>
                   </div>
                   <div className="imagen">
-                    <img
-                      src={imagens[props.valores.Favoritos[5]]}
-                      alt={""}
-                      width={20}
-                      height={20}
-                    ></img>
+                    {props.valores.Favoritos[5] !== undefined ? (
+                      <img
+                        src={imagens[props.valores.Favoritos[5]]}
+                        alt={""}
+                        width={20}
+                        height={20}
+                      ></img>
+                    ) : null}
                   </div>
                   {/* <h3>{props.valores.PostPick ? props.valores.PostPick : null}</h3>
           <h3>{props.valores.PostPick ? props.valores.PostPick : null}</h3> */}
@@ -152,9 +155,16 @@ export default function Dicas(props) {
               {props.valores.TrackName ? props.valores.Dis + "m" : null}
             </h3>
           </div>
+          {/* <div className="conteinerRelogio">
+            <Countdown
+              time={props.valores.HoraCorridaBR}
+              data={props.valores.DataCorrida}
+            ></Countdown>
+          </div> */}
         </Card>
       </div>
-      <div className="conteinerCard">
+
+      {/* <div className="conteinerCard">
         <Card className="card-dicas">
           <div className="conteinertitulo">
             <p class="lbl-card">Informações do Card</p>
@@ -171,7 +181,7 @@ export default function Dicas(props) {
             </h3>
           </div>
         </Card>
-      </div>
+      </div> */}
       {/* <Card className="card-dicas">
         <h3>{props.valores.PostPick ? "Post" : null}</h3>
       </Card> */}

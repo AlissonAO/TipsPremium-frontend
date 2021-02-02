@@ -28,22 +28,32 @@ const LuckyDip = (props) => {
   // }, [isClicked, objects, open]);
 
   function calcularPredicator(rating, id) {
-    if (props.listBetfair.runners !== undefined) {
+    if (
+      props.listBetfair !== undefined &&
+      props.listBetfair.runners !== undefined
+    ) {
       let valor = props.listBetfair.runners.find(
         (valor) => valor.selectionId === id
       );
       console.log(valor);
       if (typeof valor !== "undefined") {
-        let final = rating / 2;
-        let retorno = Math.round(
-          (1 / valor.ex.availableToLay[0].price) * 100 + final
-        );
-        if (retorno <= 100) {
-          return Math.round(
+        if (
+          valor.ex.availableToLay !== "undefined" &&
+          valor.ex.availableToLay.length !== 0
+        ) {
+          let final = rating / 2;
+          let retorno = Math.round(
             (1 / valor.ex.availableToLay[0].price) * 100 + final
           );
+          if (retorno <= 100) {
+            return Math.round(
+              (1 / valor.ex.availableToLay[0].price) * 100 + final
+            );
+          } else {
+            retorno = 85;
+          }
         } else {
-          retorno = 85;
+          return rating;
         }
       } else {
         return rating;
@@ -198,14 +208,13 @@ const LuckyDip = (props) => {
       </div>
     </div>
   );
-  console.log(props.listGalgos.dogs);
   return (
     <div className="conteinerPredicator">
       <div style={{ maxWidth: "800px", position: "relative" }}>
         <div className="header">
           <span>
-            O Predictor é baseado no mercado atual(Betfair) e no
-            Rating(Avaliação) da plataforma, juntos somados iram simular o
+            O Predictor é baseado no mercado atual(Betfair e bet365 ) e no
+            Rating(Avaliação) da plataforma, juntos somados iram SIMULAR o
             resultado.
           </span>
         </div>

@@ -1,5 +1,5 @@
 .conteinerMenu {
-  margin: 10px 20px;
+  margin: 1px 0px;
   padding: 9px 10%;
   background-color: #242e3e;
   height: auto;
@@ -28,10 +28,13 @@
 
 .nav__links {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   list-style-type: none;
-  margin-top: 30px;
+  margin-top: 10px;
   margin: 0;
   background-color: #242e3e;
+  height: 20px;
 }
 
 .nav__links li {
@@ -42,11 +45,30 @@
 }
 .nav__links li a {
   margin-top: 30px;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 400;
   background-color: #242e3e;
-  color: aliceblue;
+  color: white;
   text-decoration: none;
 }
 .nav__links li a:hover {
   color: #0088a9;
+}
+
+.icons {
+  background-color: #242e3e;
+  color: white;
+  text-decoration: none;
+  margin-right: 0px;
+  padding-right: 0px;
+}
+
+.space {
+  margin-left: -10px;
+  margin-right: 10px;
+}
+.disable {
+  pointer-events: none;
+  opacity: 0.6;
+  color: #a3a3a3 !important;
 }
