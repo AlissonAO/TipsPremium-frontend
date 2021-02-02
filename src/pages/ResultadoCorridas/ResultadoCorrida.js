@@ -16,6 +16,7 @@ export default function ResultadoCorrida() {
   const [dateSelecionanda, setAutoClose] = useState(new Date());
   const [loading, setLoading] = useState(true);
 
+  
   const [list, setList] = useState([]);
   const [key, setKeys] = useState([]);
 
