@@ -13,6 +13,7 @@ import Menu from "../../pages/Menu/index";
 
 export default function ResultadoCorrida() {
   //
+  
   const [dateSelecionanda, setAutoClose] = useState(new Date());
   const [loading, setLoading] = useState(true);
 
