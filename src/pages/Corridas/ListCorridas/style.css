@@ -1,0 +1,13 @@
+.conteinerList {
+  padding: 1x 1px;
+  margin: 10px 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.color {
+  color: white;
+  background-color: aliceblue;
+  width: auto;
+  height: auto;
+}

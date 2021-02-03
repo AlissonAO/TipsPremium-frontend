@@ -6,16 +6,37 @@
   width: auto;
   text-decoration: none;
 }
-@media (max-width: 1047px) {
-  /* line 31, ../sass/_footer.scss */
-  .conteinerMenu {
-    width: auto;
-  }
-}
+
 @media (max-width: 767px) {
   /* line 3, ../sass/_footer.scss */
   .conteinerMenu {
     width: auto;
+    margin: 5px 2px;
+    border-radius: 2px;
+  }
+  .nav__links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    margin-top: 10px;
+    margin: 0;
+    background-color: #242e3e;
+    height: 20px;
+  }
+
+  .nav__links li {
+    padding: 10px 10px;
+    margin: 2px;
+    background-color: #242e3e;
+    align-self: center;
+  }
+  .nav__links li a {
+    margin-top: 30px;
+    font-size: 10px;
+    font-weight: 100;
+    background-color: #242e3e;
+    color: white;
   }
 }
 
@@ -23,6 +44,32 @@
   /* line 31, ../sass/_footer.scss */
   .conteinerMenu {
     width: auto;
+    margin: 5px 3px;
+    border-radius: 2px;
+  }
+  .nav__links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    margin-top: 10px;
+    margin: 0;
+    background-color: #242e3e;
+    height: 20px;
+  }
+
+  .nav__links li {
+    padding: 10px 10px;
+    margin: 2px;
+    background-color: #242e3e;
+    align-self: center;
+  }
+  .nav__links li a {
+    margin-top: 30px;
+    font-size: 10px;
+    font-weight: 400;
+    background-color: #242e3e;
+    color: white;
   }
 }
 

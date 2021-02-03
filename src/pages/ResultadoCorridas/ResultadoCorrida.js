@@ -5,27 +5,29 @@ import api from "../../Api/Api";
 import "./style.css";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-// import { format, parseISO } from 'date-fns';
+import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
-import LoadingOverlay from "react-loading-overlay";
 import Menu from "../../pages/Menu/index";
+import { zonedTimeToUtc } from "date-fns-tz";
 
 export default function ResultadoCorrida() {
-  //
   const [dateSelecionanda, setAutoClose] = useState(new Date());
   const [loading, setLoading] = useState(true);
-
   const [list, setList] = useState([]);
   const [key, setKeys] = useState([]);
 
   async function carregarListar() {
     setLoading(false);
+    const formattedDate = format(
+      new Date(dateSelecionanda),
+      "yyyy-MM-dd HH:mm:ss"
+    );
+    console.log(formattedDate);
     const response = await api.get("/listarResultados", {
       params: {
-        data: dateSelecionanda.toISOString(),
+        data: formattedDate,
       },
     });
 
@@ -61,7 +63,7 @@ export default function ResultadoCorrida() {
 
   const Rows = list.map((linha) => (
     <tr key={linha}>
-      <td className="td-result">{linha.nomegalgo}</td>
+      <td className="td-result td-texte">{linha.nomegalgo}</td>
       <td className="td-result">{linha.datainicio}</td>
       <td className="td-result">{linha.datafim}</td>
       <td className="td-result">{linha.pista}</td>
@@ -101,64 +103,58 @@ export default function ResultadoCorrida() {
     <>
       <Menu></Menu>
       <div className="conteiner-result">
-        <div>
-          <span className="texto-batfair">Consultar resultado Betfair</span>
-          <div className="conteiner-texto">
-            <div className="conteiner-texto-data">
-              <span className="texto-data">Selecione a Data:</span>
-            </div>
-            <div>
-              <DatePicker
-                locale="ptBR"
-                dateFormat="dd/MM/yyyy"
-                selected={dateSelecionanda}
-                onChange={(dateSelecionanda) => autoClosee(dateSelecionanda)}
-                minDate={new Date("2020-07-19")}
-                maxDate={new Date()}
-                className="form-control"
-                popperModifiers={{
-                  offset: {
-                    enabled: true,
-                    offset: "1px, 5px",
-                  },
-                  preventOverflow: {
-                    enabled: true,
-                    escapeWithReference: false,
-                    boundariesElement: "viewport",
-                  },
-                }}
-              />
-            </div>
-          </div>
-          <div className="conteiner-pesquisar-button">
-            <Button className="button" onClick={carregarListar}>
-              Pesquisar
-            </Button>
-          </div>
-          <div className="conteiner-clear-button">
-            <Button onClick={limpaTela}>Limpa</Button>
-          </div>
+        <span className="texto-batfair">Consultar resultado Betfair</span>
+        <div className="conteiner-texto">
+          <span className="texto-data">Selecione a Data:</span>
+          <DatePicker
+            locale="ptBR"
+            dateFormat="dd/MM/yyyy"
+            selected={dateSelecionanda}
+            onChange={(dateSelecionanda) => autoClosee(dateSelecionanda)}
+            minDate={new Date("2020-07-19")}
+            maxDate={new Date()}
+            className="form-control"
+            popperModifiers={{
+              offset: {
+                enabled: true,
+                offset: "1px, 5px",
+              },
+              preventOverflow: {
+                enabled: true,
+                escapeWithReference: false,
+                boundariesElement: "viewport",
+              },
+            }}
+          />
         </div>
-        <div>
-          {loading ? (
-            <table className="table-result">
-              <thead>
-                <tr>
-                  {key.map((item) => (
-                    <th className="th-result" key={item}>
-                      {item}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="card-table">{Rows}</tbody>
-            </table>
-          ) : (
-            <div>
-              <BorderLinearProgress variant="indeterminate" value={loading} />
-            </div>
-          )}
+        <div className="conteiner-pesquisar-button">
+          <Button className="button" onClick={carregarListar}>
+            Pesquisar
+          </Button>
         </div>
+        <div className="conteiner-clear-button">
+          <Button onClick={limpaTela}>Limpa</Button>
+        </div>
+      </div>
+      <div>
+        {loading ? (
+          <table className="table-result">
+            <thead>
+              <tr>
+                {key.map((item) => (
+                  <th className="th-result" key={item}>
+                    {item}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="card-table">{Rows}</tbody>
+          </table>
+        ) : (
+          <div>
+            <BorderLinearProgress variant="indeterminate" value={loading} />
+          </div>
+        )}
       </div>
     </>
   );

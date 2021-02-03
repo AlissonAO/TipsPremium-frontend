@@ -18,8 +18,8 @@ export default function MenuCorrida(props) {
   const BorderLinearProgress = withStyles((theme) => ({
     root: {
       width: "100%",
-      height: "2px",
-      marginTop: "200px",
+      height: "3px",
+      marginTop: "20px",
     },
     colorPrimary: {
       backgroundColor: "#0a0a0a",
@@ -37,7 +37,7 @@ export default function MenuCorrida(props) {
       setCorridas(response.data);
     } else {
       return swal(
-        "Não há corridas no momento, estamos processando aguarde....",
+        "Não há corrida no momento, estamos processando aguarde....",
         "",
         "info",
         {
@@ -69,7 +69,7 @@ export default function MenuCorrida(props) {
   };
 
   return (
-    <div className="conteinerMenuCorrida">
+    <div className={loading ? "conteinerMenuCorrida" : null}>
       {loading ? (
         listCorrida.map((item) => (
           <Card

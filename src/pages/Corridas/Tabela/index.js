@@ -311,10 +311,13 @@ function Corridas(props) {
     vencedor: {
       color: "#98fb98;",
     },
-
     valor: {
       fontSize: "15px",
       color: "#08CCAB",
+    },
+
+    teste: {
+      position: "sticky",
     },
   }));
   const classes = useRowStyles(props);
