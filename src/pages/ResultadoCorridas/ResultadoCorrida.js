@@ -98,7 +98,7 @@ export default function ResultadoCorrida() {
   }))(LinearProgress);
   return (
     <>
-      <Menu></Menu>
+    
       <div className="conteiner-result">
         <span className="texto-batfair">Consultar resultado Betfair</span>
         <div className="conteiner-texto">
