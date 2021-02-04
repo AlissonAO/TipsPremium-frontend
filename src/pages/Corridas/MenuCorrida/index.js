@@ -32,7 +32,7 @@ export default function MenuCorrida(props) {
   async function obterlista() {
     const response = await api.get("/listarCorridas");
     // subscriberDadosPista((dadosAposta) => setCorridas(dadosAposta));
-    console.log(response.data);
+    // console.log(response.data);
     if (response.data.length !== 0) {
       setCorridas(response.data);
     } else {

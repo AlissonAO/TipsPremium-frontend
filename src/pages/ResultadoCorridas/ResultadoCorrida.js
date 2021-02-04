@@ -24,7 +24,6 @@ export default function ResultadoCorrida() {
       new Date(dateSelecionanda),
       "yyyy-MM-dd HH:mm:ss"
     );
-    console.log(formattedDate);
     const response = await api.get("/listarResultados", {
       params: {
         data: formattedDate,

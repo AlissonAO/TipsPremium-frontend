@@ -70,7 +70,7 @@ function Corridas(props) {
   };
   useEffect(() => {
     setListGalgos(props.corrida);
-    console.log(props.corrida);
+    // console.log(props.corrida);
     setListGalgosBetfair([]);
     setBuscaCorrida(true);
     setLoading(false);
@@ -102,7 +102,7 @@ function Corridas(props) {
     setLoading(true);
     if (habitarPredicator) {
       if (listGalgosBetfair !== []) {
-        console.log("Busnca api betfair");
+        // console.log("Busnca api betfair");
         const interval = setInterval(async () => {
           if (buscaCorrida) {
             obterdados();
@@ -138,7 +138,7 @@ function Corridas(props) {
         id: listGalgos.idMarket,
       },
     });
-    console.log(dados.data[0]);
+    // console.log(dados.data[0]);
     if (dados.data[0]) {
       setListGalgosBetfair(dados.data[0]);
     } else {
