@@ -5,7 +5,7 @@ import api from "../../Api/Api";
 import "./style.css";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-// import { format, parseISO } from 'date-fns';
+import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
@@ -23,9 +23,13 @@ export default function ResultadoCorrida() {
 
   async function carregarListar() {
     setLoading(false);
+    const formattedDate = format(
+      new Date(dateSelecionanda),
+      "yyyy-MM-dd HH:mm:ss"
+    );
     const response = await api.get("/listarResultados", {
       params: {
-        data: dateSelecionanda.toISOString(),
+        data: formattedDate,
       },
     });
 
