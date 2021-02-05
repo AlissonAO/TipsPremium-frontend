@@ -224,7 +224,8 @@ function Corridas(props) {
       },
       MuiIconButton: {
         root: {
-          color: "#82cbc4",
+          color: "#00ff00",
+          // color: "#82cbc4",
         },
       },
       MuiTypography: {
@@ -678,8 +679,8 @@ function Corridas(props) {
                       <TableCell align={"center"}>Top Speed</TableCell>
                       <TableCell align={"center"}>Valor Investido</TableCell>
                       <TableCell align={"center"}>Probabilidade</TableCell>
-                      <TableCell align={"center"}>FAVOR</TableCell>
-                      <TableCell align={"center"}>CONTRA</TableCell>
+                      <TableCell align={"center"}>BACK</TableCell>
+                      <TableCell align={"center"}>LAY</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

@@ -13,7 +13,7 @@
   justify-content: center;
 }
 .butum-expasion {
-  color: red;
+  color: #00ff00;
   width: 100px;
 }
 .conteiner-video {
@@ -40,12 +40,16 @@
   left: 10;
 }
 
-@media screen and (max-width: 664px) {
+@media screen and (max-width: 564px) {
   .conteiner-video {
     display: flex;
     justify-content: center;
     margin: 0px 0px;
     background-color: #242e3e;
     flex-direction: column;
+  }
+  .item-player {
+    margin: 1px;
+    padding: 1%;
   }
 }

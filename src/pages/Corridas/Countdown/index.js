@@ -6,6 +6,7 @@ import { zonedTimeToUtc } from "date-fns-tz";
 import intervalToDuration from "date-fns/intervalToDuration";
 
 export default function Countdown(props) {
+  const [atrasado, setAtrasado] = useState(false);
   const calculateTimeLeft = () => {
     let timeLeft = {};
     const dataCorrida = addHours(new Date(props.data), 3);
@@ -28,6 +29,11 @@ export default function Countdown(props) {
           ? String("0" + difference.seconds)
           : String(difference.seconds),
     };
+    if (new Date().getTime() > addHours(new Date(props.data), 3).getTime()) {
+      if (!atrasado) {
+        setAtrasado(true);
+      }
+    }
     return timeLeft;
   };
 
@@ -40,10 +46,13 @@ export default function Countdown(props) {
   });
 
   return (
-    <div>
-      <div className="color">
+    <>
+      <div className="conteiner-texto">
+        <span className="text-inicio">Inicio :</span>
+      </div>
+      <div className={atrasado ? "sem-corrida" : "color"}>
         {timeLeft.hours + ":" + timeLeft.minutes + ":" + timeLeft.seconds}
       </div>
-    </div>
+    </>
   );
 }

@@ -155,12 +155,12 @@ export default function Dicas(props) {
               {props.valores.TrackName ? props.valores.Dis + "m" : null}
             </h3>
           </div>
-          {/* <div className="conteinerRelogio">
+          <div className="conteinerRelogio">
             <Countdown
               time={props.valores.HoraCorridaBR}
               data={props.valores.DataCorrida}
             ></Countdown>
-          </div> */}
+          </div>
         </Card>
       </div>
 
