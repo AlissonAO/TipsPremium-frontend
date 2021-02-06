@@ -45,6 +45,10 @@ export default function Countdown(props) {
     }, 1000);
   });
 
+  useEffect(() => {
+    setAtrasado(false);
+  }, [props]);
+
   return (
     <>
       <div className="conteiner-texto">
