@@ -40,7 +40,8 @@
 .text-inicio {
   font-size: 25px;
   font-weight: 600;
-  color: #c9d0d5;
+  /* color: #c9d0d5; */
+  color: white;
 }
 
 @media screen and (max-width: 567px) {

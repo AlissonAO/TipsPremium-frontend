@@ -105,7 +105,7 @@
   font-weight: 600;
   color: #c9d0d5;
   margin: 10px;
-  padding: 2px;
+  padding-top: 5px;
 }
 
 @media screen and (max-width: 567px) {

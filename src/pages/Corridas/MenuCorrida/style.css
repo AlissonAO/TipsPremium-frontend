@@ -77,19 +77,22 @@
 
 .colorTexto {
   /* color: #82cbc4; */
-  color: #adb7be;
+  /* color: #adb7be; */
+  color: white;
 }
 
 .textoCorrida {
   padding: 5px;
   background-color: transparent;
-  color: #adb7be;
+  color: white;
+  /* color: #adb7be; */
   font-size: 15px;
   line-height: 1.2;
   text-align: center;
   margin: 0px;
   margin-bottom: 0px;
   padding-bottom: 0px;
+  font-weight: 500;
 }
 
 .conteiner-hora {
@@ -98,11 +101,11 @@
 }
 .textohora {
   padding: 10px;
-
   border-radius: 5px;
   color: #82cbc4;
   font-size: 17px;
   text-align: center;
   padding-bottom: 3px;
   margin-bottom: 7px;
+  font-weight: 500;
 }
