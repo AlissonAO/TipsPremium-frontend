@@ -5,6 +5,10 @@
   border-radius: 5px;
 }
 
+.teste {
+  background-color: white;
+}
+
 .conteiner-table {
   width: 100%;
   display: flex;
@@ -191,7 +195,6 @@
 
 .th-result {
   color: #adb7be;
-  border-bottom: 1px solid red !important;
   white-space: nowrap;
   background: #363d47;
   padding: 1.05rem 0.75rem;

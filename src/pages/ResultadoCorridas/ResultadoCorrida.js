@@ -37,7 +37,6 @@ export default function ResultadoCorrida() {
       });
     } else {
       setList(response.data);
-      setKeys(Object.keys(response.data[0]));
     }
     setLoading(true);
   }
@@ -68,12 +67,12 @@ export default function ResultadoCorrida() {
       <td className="td-result">{linha.pista}</td>
       <td className="td-result">{linha.grade}</td>
       <td className="td-result">{linha.trap}</td>
-      <td className="td-result">{linha.odd_lay}</td>
       <td className="td-result">{linha.odd_back}</td>
-      <td className="td-result">{linha.probabilidade}</td>
-      <td className="td-result">{linha["Total Galgo"]}</td>
+      <td className="td-result">{linha.odd_lay}</td>
       <td className="td-result">{linha.win}</td>
-      <td className="td-result">{linha["Total da corrida"]}</td>
+      <td className="td-result">{linha.odd_back_place}</td>
+      <td className="td-result">{linha.odd_lay_place}</td>
+      <td className="td-result">{linha.win_place}</td>
     </tr>
   ));
 
@@ -140,11 +139,18 @@ export default function ResultadoCorrida() {
           <table className="table-result">
             <thead>
               <tr>
-                {key.map((item) => (
-                  <th className="th-result" key={item}>
-                    {item}
-                  </th>
-                ))}
+                <th className="th-result">NomeGalgo</th>
+                <th className="th-result">Data Inicio</th>
+                <th className="th-result">Data Fim</th>
+                <th className="th-result">Pista</th>
+                <th className="th-result">Grade</th>
+                <th className="th-result">Trap</th>
+                <th className="th-result">ODD BACK</th>
+                <th className="th-result">ODD LAY</th>
+                <th className="th-result">WIN</th>
+                <th className="th-result">ODD BACK PLACE</th>
+                <th className="th-result">ODD LAY PLACE</th>
+                <th className="th-result">WIN PLACE</th>
               </tr>
             </thead>
             <tbody className="card-table">{Rows}</tbody>
