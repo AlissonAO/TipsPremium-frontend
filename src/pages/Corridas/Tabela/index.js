@@ -107,7 +107,7 @@ function Corridas(props) {
           if (buscaCorrida) {
             obterdados();
           }
-        }, 15000);
+        }, 10000);
         return () => {
           clearInterval(interval);
         };
@@ -138,7 +138,7 @@ function Corridas(props) {
         id: listGalgos.idMarket,
       },
     });
-    // console.log(dados.data[0]);
+    console.log(dados.data[0]);
     if (dados.data[0]) {
       setListGalgosBetfair(dados.data[0]);
     } else {
@@ -190,8 +190,8 @@ function Corridas(props) {
 
       MuiTableHead: {
         root: {
-          background: "#82cbc4",
-          // background: "#363d47",
+          // background: "#82cbc4", verde
+          background: "#363d47",
           padding: "10px",
           color: "#000000",
         },
@@ -207,18 +207,19 @@ function Corridas(props) {
         root: {},
         body: {
           color: "#d8e4ec",
-          borderBottom: "0.5px solid #1e2734",
+          borderBottom: "0.5px #1e2734 solid",
           fontSize: "15px",
           fontFamily: "Mada,sans-serif",
           padding: "5px",
         },
         head: {
-          color: "#263238",
-          // color: "white",
-          borderBottom: "1px solid #1d2431",
+          // color: "#263238",
+          color: "white",
+          borderBottom: "2px black solid",
+          borderTop: "2px black solid",
           fontFamily: "Mada,sans-serif",
           fontSize: "15px",
-          padding: "3px",
+          padding: "4px",
           fontWeight: "900",
         },
       },
@@ -319,6 +320,21 @@ function Corridas(props) {
 
     teste: {
       position: "sticky",
+    },
+    testee: {
+      paddingTop: "30px",
+      paddingRigth: "5px",
+      marginTop: "10px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-end",
+      color: "white",
+      textAlign: "center",
+      whiteSpace: "nowrap",
+      backgroundColor: "#27619b",
+      fontWeight: "500",
+      fontSize: "15px",
+      borderRadius: "3px",
     },
   }));
   const classes = useRowStyles(props);
@@ -642,7 +658,7 @@ function Corridas(props) {
           >
             <Tabs
               TabIndicatorProps={{
-                style: { background: "white", height: "2px" },
+                style: { background: "#00ff00", height: "2px" },
               }}
               value={value}
               onChange={handleChange}

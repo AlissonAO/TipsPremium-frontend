@@ -212,11 +212,13 @@ const LuckyDip = (props) => {
     <div className="conteinerPredicator">
       <div style={{ maxWidth: "800px", position: "relative" }}>
         <div className="header">
-          <span>
-            O Predictor é baseado no mercado atual(Betfair e bet365 ) e no
-            Rating(Avaliação) da plataforma, juntos somados iram SIMULAR o
-            resultado.
-          </span>
+          <span style={{ color: "red" }}>ATENÇÂO!!</span>
+          <h1>
+            O Predictor é baseado nos mercados da Betfair e Bet365 somados
+            juntos com o Rating(Avaliação) da plataforma. As posições podem
+            variar de acordo com as ODD dos mercados, ou seja quanto mais
+            pessoas apostando para um determinado Galgo mais favorito ele fica.
+          </h1>
         </div>
         <div
           className="track"

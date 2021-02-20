@@ -9,10 +9,10 @@
 .header {
   margin-top: 0px;
   padding: 13px 15px 13px 15px;
-  font-size: 14px;
-  font-weight: 600;
-  background: #37474f;
-  color: white;
+  /* font-size: 14px;
+  font-weight: 600; */
+  background: #222c3b;
+  color: whitesmoke !important;
   text-align: left;
   border-radius: 5px;
 }

@@ -101,11 +101,19 @@
 }
 .textohora {
   padding: 10px;
-  border-radius: 5px;
-  color: #82cbc4;
+  /* color: #82cbc4; */
+  color: #47a44b;
+  /* COLOR: WHITE; */
+  /* background-color: #47a44b; */
   font-size: 17px;
   text-align: center;
-  padding-bottom: 3px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  margin-top: 5px;
   margin-bottom: 7px;
   font-weight: 500;
+  /* border-bottom: 1px white solid; */
+  /* border-top: 1px white solid; */
+  /* border-right: 1px #47a44b solid;
+  border-left: 1px #47a44b solid; */
 }
