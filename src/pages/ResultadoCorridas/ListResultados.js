@@ -26,7 +26,6 @@ export default function ResultadoCorrida() {
   const [dateSelecionanda, setAutoClose] = useState(new Date());
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
-  const [key, setKeys] = useState([]);
   const [click, setClick] = useState(false);
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
   const [selectedDay, setSelectedDay] = useState({
@@ -67,9 +66,8 @@ export default function ResultadoCorrida() {
         className: "swal-footer",
       });
     } else {
-      console.log(response.data);
+      console.log("retorno" + response.data);
       setList(response.data);
-      setKeys(Object.keys(response.data[0]));
     }
     if (valor) {
       setLoading(true);
@@ -96,7 +94,6 @@ export default function ResultadoCorrida() {
   function limpaTela() {
     setList([]);
     setAutoClose(new Date());
-    setKeys([]);
     setClick(false);
   }
 
@@ -131,10 +128,10 @@ export default function ResultadoCorrida() {
     setClick(true);
     carregarListar(true);
   }
-  const autoClose = (date) => {
-    console.log(date);
-    selectedDay();
-  };
+  // const autoClose = (date) => {
+  //   console.log(date);
+  //   selectedDay();
+  // };
 
   const formatDate = () => {
     if (!selectedDay) return "";

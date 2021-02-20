@@ -190,8 +190,8 @@ function Corridas(props) {
 
       MuiTableHead: {
         root: {
-          // background: "#82cbc4", verde
-          background: "#363d47",
+          background: "#222c3b",
+          // background: "#363d47",
           padding: "10px",
           color: "#000000",
         },
@@ -215,8 +215,8 @@ function Corridas(props) {
         head: {
           // color: "#263238",
           color: "white",
-          borderBottom: "2px black solid",
-          borderTop: "2px black solid",
+          borderBottom: "1px black solid",
+          borderTop: "1px black solid",
           fontFamily: "Mada,sans-serif",
           fontSize: "15px",
           padding: "4px",
