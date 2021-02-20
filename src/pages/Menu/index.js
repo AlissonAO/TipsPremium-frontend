@@ -18,7 +18,7 @@ export default function Menu() {
           <img className="space " src={flecha} alt=""></img>
           <img className="icons" src={box} alt=""></img>
           <li>
-            <Link to="/ListResultados">Resultados</Link>
+            <Link to="/ResultadoCorrida">Resultados</Link>
           </li>
           <img className="space" src={flecha} alt=""></img>
           <img className="icons" src={filtro} alt=""></img>

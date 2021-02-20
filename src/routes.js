@@ -11,9 +11,9 @@ export default function Routers() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Inicio}></Route>
-        <Route path="/ResultadoCorrida" component={ResultadoCorrida}></Route>
+        <Route path="/ResultadoCorrida" component={ListResultados}></Route>
         <Route path="/Corridas" component={Corridas}></Route>
-        <Route path="/ListResultados" component={ListResultados}></Route>
+        {/* <Route path="/ListResultados" component={ListResultados}></Route> */}
       </Switch>
     </BrowserRouter>
   );
