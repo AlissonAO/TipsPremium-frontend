@@ -158,7 +158,7 @@ export default function ResultadoCorrida() {
             formatInputText={formatDate}
             inputPlaceholder="Selecione a Data" // placeholder
             // minimumDate={minimumDate}
-            // maximumDate={utils().getToday()}
+            maximumDate={utils().getToday()}
           />
         </div>
         <div className="conteiner-pesquisar-button">
