@@ -184,6 +184,9 @@
   font-size: 15px !important;
 }
 
+.Calendar__day {
+  color: black !important;
+}
 @media screen and (max-width: 664px) {
   .DatePicker {
     margin-top: 17px;
@@ -196,6 +199,9 @@
   }
   .-ltr {
     color: white;
+  }
+  .Calendar__day {
+    color: black !important;
   }
 }
 
@@ -537,9 +543,4 @@
   .responsive-calendar {
     font-size: 12px !important;
   }
-}
-
-.custom-calendar {
-  box-shadow: 0 1em 3em rgba(156, 136, 255, 0.2);
-  background-color: #1d2431;
 }
