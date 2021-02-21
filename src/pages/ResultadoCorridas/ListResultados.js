@@ -157,7 +157,7 @@ export default function ResultadoCorrida() {
             calendarClassName="responsive-calendar" // added this
             formatInputText={formatDate}
             inputPlaceholder="Selecione a Data" // placeholder
-            // minimumDate={minimumDate}
+            minimumDate={minimumDate}
             maximumDate={utils().getToday()}
           />
         </div>
