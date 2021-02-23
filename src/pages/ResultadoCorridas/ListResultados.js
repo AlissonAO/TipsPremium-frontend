@@ -192,7 +192,7 @@ export default function ResultadoCorrida() {
                     </div>
                     <div
                       className={
-                        valor.statusResultado === "C" ? "loader" : null
+                        valor.statusResultado !== "C" ? "loader" : null
                       }
                     ></div>
                   </div>
