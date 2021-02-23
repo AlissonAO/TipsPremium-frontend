@@ -84,7 +84,7 @@ export default function ResultadoCorrida() {
       if (click) {
         await carregarListar(false);
       }
-    }, 5000);
+    }, 10000);
     return () => {
       clearInterval(interval);
     };
