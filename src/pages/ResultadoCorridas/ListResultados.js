@@ -66,7 +66,6 @@ export default function ResultadoCorrida() {
         className: "swal-footer",
       });
     } else {
-      console.log("retorno" + response.data);
       setList(response.data);
     }
     if (valor) {
@@ -145,12 +144,12 @@ export default function ResultadoCorrida() {
     month: 2,
     day: 17,
   };
+
   return (
     <>
       <Menu></Menu>
       <div className="conteiner-result">
         <div className="conteiner-data">
-          <div className="conteiner-texto"></div>
           <DatePicker
             value={selectedDay}
             onChange={setSelectedDay}
@@ -177,16 +176,27 @@ export default function ResultadoCorrida() {
           <div className="conteiner-resultado">
             {list.map((valor) => (
               <Card className="conteiner-card-result">
-                <CardHeader className="text-head-card">
-                  {valor.TrackName +
-                    " | " +
-                    valor.HoraCorridaBR +
-                    " | " +
-                    valor.Grade +
-                    " | " +
-                    valor.Dis +
-                    "m"}
-                </CardHeader>
+                <div className="conteiner-header-card">
+                  <div className="conteiner-load">
+                    <div className="conteiner-header">
+                      <CardHeader className="text-head-card">
+                        {valor.TrackName +
+                          " | " +
+                          valor.HoraCorridaBR +
+                          " | " +
+                          valor.Grade +
+                          " | " +
+                          valor.Dis +
+                          "m"}
+                      </CardHeader>
+                    </div>
+                    <div
+                      className={
+                        valor.statusResultado === "C" ? "loader" : null
+                      }
+                    ></div>
+                  </div>
+                </div>
                 <CardHeader className="conteiner-cabecalho">
                   <Table
                     className="container-tabela"
@@ -204,7 +214,6 @@ export default function ResultadoCorrida() {
                     </thead>
                   </Table>
                 </CardHeader>
-
                 <CardBody>
                   {obterResultado(valor).map((dog) => (
                     <Table
