@@ -150,6 +150,7 @@ export default function ResultadoCorrida() {
       <Menu></Menu>
       <div className="conteiner-result">
         <div className="conteiner-data">
+          <div className="conteiner-texto"></div>
           <DatePicker
             value={selectedDay}
             onChange={setSelectedDay}
