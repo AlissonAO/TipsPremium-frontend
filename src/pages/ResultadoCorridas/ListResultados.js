@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, CardHeader, CardBody, Table } from "reactstrap";
-// import "react-modern-calendar-datepicker/lib/DatePicker.css";
-// import "react-datepicker/dist/react-datepicker.css";
-// import { utils } from "react-modern-calendar-datepicker";
-// import DatePicker from "react-modern-calendar-datepicker";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { utils } from "react-modern-calendar-datepicker";
+import DatePicker from "react-modern-calendar-datepicker";
 import api from "../../Api/Api";
 import "./style.css";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
 import Menu from "../../pages/Menu/index";
 
@@ -52,7 +52,7 @@ export default function ResultadoCorrida() {
     console.log(formattedDate);
     const response = await api.get("/listarResultados", {
       params: {
-        data: "2021-03-04",
+        data: formattedDate,
       },
     });
 
@@ -148,7 +148,7 @@ export default function ResultadoCorrida() {
       <div className="conteiner-result">
         <div className="conteiner-data">
           <div className="conteiner-texto"></div>
-          {/* <DatePicker
+          <DatePicker
             value={selectedDay}
             onChange={setSelectedDay}
             calendarClassName="responsive-calendar" // added this
@@ -156,7 +156,7 @@ export default function ResultadoCorrida() {
             inputPlaceholder="Selecione a Data" // placeholder
             minimumDate={minimumDate}
             maximumDate={utils().getToday()}
-          /> */}
+          />
         </div>
         <div className="conteiner-pesquisar-button">
           <Button onClick={clickk}>
