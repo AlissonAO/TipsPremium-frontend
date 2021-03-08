@@ -26,7 +26,7 @@
 
 .conteiner-texto {
   margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 567px) {
@@ -165,44 +165,7 @@
 .conteiner-data {
   width: 100%;
   display: flex;
-  justify-content: start;
-}
-
-.DatePicker {
-  padding-top: 5px;
-  margin-left: 40%;
-  margin-top: 10px;
-}
-.DatePicker__input {
-  background-color: #242e3e !important;
-  width: 400px;
-  height: 50px;
-}
-.-ltr {
-  color: white;
-  font-size: 415px;
-  font-size: 15px !important;
-}
-
-.Calendar__day {
-  color: black !important;
-}
-@media screen and (max-width: 664px) {
-  .DatePicker {
-    margin-top: 17px;
-    padding-right: 10px;
-    margin-left: -160px;
-  }
-  .DatePicker__input {
-    background-color: #242e3e !important;
-    width: 150px;
-  }
-  .-ltr {
-    color: white;
-  }
-  .Calendar__day {
-    color: black !important;
-  }
+  justify-content: center;
 }
 
 /* .form-control {
@@ -389,7 +352,6 @@
   display: flex;
   flex-direction: row;
 }
-
 .text-head-card {
   color: white;
   background-color: #47a44b;
@@ -399,7 +361,7 @@
   height: 35px;
   text-align: center;
   border-radius: 7px 7px 0px 0px;
-  /* border-bottom: 0.01rem #adb7be solid; */
+  border-bottom: 0.01rem #adb7be solid;
 
   /* background-image: url(../../asserts/loading/loading.gif);
   background-repeat: no-repeat; */

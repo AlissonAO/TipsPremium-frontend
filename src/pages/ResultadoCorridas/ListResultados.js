@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, CardHeader, CardBody, Table } from "reactstrap";
 // import DatePicker from "react-datepicker";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { utils } from "react-modern-calendar-datepicker";
-import DatePicker from "react-modern-calendar-datepicker";
+// import "react-modern-calendar-datepicker/lib/DatePicker.css";
+// import { utils } from "react-modern-calendar-datepicker";
+// import DatePicker from "react-modern-calendar-datepicker";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import { createMuiTheme } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core/styles";
 import api from "../../Api/Api";
 import "./style.css";
 import { withStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
 import Menu from "../../pages/Menu/index";
-import { zonedTimeToUtc } from "date-fns-tz";
 
 import trap1 from "../../asserts/trap/1.png";
 import trap2 from "../../asserts/trap/2.png";
@@ -28,30 +30,15 @@ export default function ResultadoCorrida() {
   const [list, setList] = useState([]);
   const [click, setClick] = useState(false);
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
-  const [selectedDay, setSelectedDay] = useState({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate(),
-  });
+  const [selectedDate, setDateChange] = useState(new Date());
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function carregarListar(valor) {
     if (valor) {
       setLoading(false);
     }
-    var formattedDate = "";
-    if (selectedDay !== null) {
-      let dataFormatada =
-        selectedDay.year +
-        "-" +
-        "0" +
-        selectedDay.month +
-        "-" +
-        selectedDay.day;
-      formattedDate = new Date(dataFormatada);
-    } else {
-      formattedDate = format(new Date(dateSelecionanda), "yyyy-MM-dd");
-    }
+    const formattedDate = format(dateSelecionanda, "yyyy-MM-dd ");
+
     console.log(formattedDate);
     const response = await api.get("/listarResultados", {
       params: {
@@ -127,31 +114,109 @@ export default function ResultadoCorrida() {
     setClick(true);
     carregarListar(true);
   }
-  // const autoClose = (date) => {
-  //   console.log(date);
-  //   selectedDay();
-  // };
 
-  const formatDate = () => {
-    if (!selectedDay) return "";
-    return `Dia: ${selectedDay.day}/${
-      selectedDay.month !== 12 ? "0" + selectedDay.month : selectedDay.month
-    }/${selectedDay.year}  `;
+  const handleDateChange = (date) => {
+    setAutoClose(date);
   };
 
-  const minimumDate = {
-    year: 2021,
-    month: 2,
-    day: 17,
-  };
+  const materialTheme = createMuiTheme({
+    overrides: {
+      MuiPickersToolbar: {
+        toolbar: {
+          backgroundColor: "#43a047",
+        },
+      },
+      MuiPickersCalendarHeader: {
+        switchHeader: {
+          // backgroundColor: lightBlue.A200,
+          // color: "white",
+        },
+      },
+      MuiPickersDay: {
+        day: {
+          color: "black",
+        },
+        daySelected: {
+          backgroundColor: "#43a047",
+        },
+        dayDisabled: {
+          color: "gray",
+        },
+        current: {
+          color: "black",
+        },
+      },
+      MuiInputBase: {
+        root: {
+          color: "white",
+          // backgroundColor: "red",
+          borderRadius: "5px",
+          textAlign: "center",
+          padding: "10px 10px 10px 10px",
+          margin: "10px",
+          fontSize: "20px",
+          border: "1px white solid",
+        },
+      },
+      MuiFormLabel: {
+        root: {
+          color: "red",
+          fontSize: "20px",
+          padding: "1px 15px 15px 60px",
+          margin: "10px",
+        },
+      },
+      MuiInput: {
+        root: {
+          underline: {
+            before: {
+              color: "red",
+            },
+            after: {
+              color: "red",
+            },
+          },
+        },
+      },
+      MuiFormControl: {
+        root: {
+          color: "white",
+        },
+      },
 
+      MuiPickersModal: {
+        dialogAction: {
+          // color: lightBlue["400"],
+        },
+      },
+    },
+  });
+
+  class LocalizedUtils extends DateFnsUtils {
+    getDatePickerHeaderText(date) {
+      return format(date, "d MMM yyyy", { locale: this.locale });
+    }
+  }
   return (
     <>
       <Menu></Menu>
       <div className="conteiner-result">
         <div className="conteiner-data">
-          <div className="conteiner-texto"></div>
-          <DatePicker
+          <ThemeProvider theme={materialTheme}>
+            <MuiPickersUtilsProvider utils={LocalizedUtils} locale={ptBR}>
+              <DatePicker
+                autoOk
+                format="dd/MM/yyyy"
+                clearable
+                value={dateSelecionanda}
+                onChange={handleDateChange}
+                disableFuture
+                minDate={new Date("2021-02-17")}
+              />
+            </MuiPickersUtilsProvider>
+          </ThemeProvider>
+
+          {/* <DatePicker
             value={selectedDay}
             onChange={setSelectedDay}
             calendarClassName="responsive-calendar" // added this
@@ -159,7 +224,7 @@ export default function ResultadoCorrida() {
             inputPlaceholder="Selecione a Data" // placeholder
             minimumDate={minimumDate}
             maximumDate={utils().getToday()}
-          />
+          /> */}
         </div>
         <div className="conteiner-pesquisar-button">
           <Button onClick={clickk}>
