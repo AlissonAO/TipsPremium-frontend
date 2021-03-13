@@ -1,13 +1,332 @@
 .conteinerList {
+  margin: 1px 20px;
   padding: 1x 1px;
-  margin: 10px 20px;
-  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.listCorrida-conteiner-conteudo {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
   height: 100%;
 }
+.listCorrida-conteinerList {
+  margin: 1px 20px;
+  padding: 1x 1px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 35px;
+}
 
-.color {
+@media (max-width: 664px) {
+  .listCorrida-conteinerList {
+    margin: 1px 0px;
+    padding: 1x 1px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  .listCorrida-conteiner-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    min-width: 90px;
+    height: 100%;
+  }
+}
+
+.listCorrida-h1-texto-estadio {
   color: white;
-  background-color: aliceblue;
+  margin: 6px 0px 5px 5px;
+  font-weight: 600px;
+  font-size: 16px;
+  text-align: start;
+  padding-left: 5px;
+  width: 100%;
+}
+.listCorrida-conteiner-conteudo-corrida {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  margin-left: 10px;
+}
+.listCorrida-h1-texto-track {
+  color: #c9d0d5;
+  margin: 0px 0px 0px 2px;
+  font-size: 15px;
+  text-align: center;
+  padding: 1px 0px 0px 0px;
+  font-weight: 500;
+}
+
+.listCorrida-h1-texto-dis {
+  color: #c9d0d5;
+  margin: 1px 0px 0px 10px;
+  font-weight: 600px;
+  font-size: 14px;
+  text-align: center;
+  padding: 0px;
+  font-weight: 500;
+}
+
+.listCorrida-h1-texto-favorito {
+  color: white;
+  margin: 6px 0px 1px 5px;
+  font-weight: 600px;
+  font-size: 14px;
+  padding: 0px 0px 0px 80px;
+  text-align: left;
+}
+
+@media (max-width: 664px) {
+  .listCorrida-h1-texto-estadio {
+    color: white;
+    margin: 0px 0px 10px 5px;
+    font-weight: 600px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .listCorrida-h1-texto-favorito {
+    color: white;
+    margin: 6px 0px 0px 5px;
+    font-weight: 600px;
+    font-size: 14px;
+    text-align: start;
+  }
+
+  .listCorrida-conteiner-conteudo-corrida {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    margin-left: 1px;
+  }
+  .listCorrida-h1-texto-track {
+    color: #c9d0d5;
+    margin: 1px 5px 10px 7px;
+    font-size: 12px;
+    text-align: center;
+    padding: 1px;
+    font-weight: 800;
+  }
+
+  .listCorrida-h1-texto-dis {
+    color: #c9d0d5;
+    margin: 1px 0px 10px 5px;
+    font-weight: 600px;
+    font-size: 13px;
+    text-align: center;
+    padding: 0px;
+    font-weight: 500;
+  }
+}
+
+.listCorrida-conteiner-card {
+  display: flex;
+  justify-content: center;
+}
+
+.listCorrida-conteiner-card-body:hover {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1.02);
+  background-color: #363e4b;
+}
+
+.listCorrida-conteiner-card-body {
+  display: flex;
+  flex-direction: row;
+  margin: 2px 0px 0px 0px;
+  background-color: #242e3e;
+  border-radius: 2px;
+  border-bottom: 0.05rem #c9d0d5 solid;
   width: auto;
-  height: auto;
+  height: 100%;
+}
+@media (max-width: 664px) {
+  .listCorrida-conteiner-card {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .listCorrida-conteiner-card-body:hover {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1.02);
+    background-color: #363e4b;
+  }
+
+  .listCorrida-conteiner-card-body {
+    display: flex;
+    flex-direction: row;
+    margin: 2px 0px 0px 0px;
+    text-align: center;
+    background-color: #242e3e;
+    border-radius: 2px;
+    border-bottom: 0.05rem #c9d0d5 solid;
+    width: 350px;
+    height: 100%;
+  }
+}
+
+.listCorrida-conteiner-pais {
+  display: flex;
+  flex-direction: row;
+}
+
+.listCorrida-pais {
+  margin: 8px 1px 1px 1px;
+  padding: auto;
+}
+.listCorrida-conteiner-horario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1px 2px 2px 5px;
+  border-right: 1px grey solid;
+  width: 110px;
+}
+
+.listCorrida-text-horario {
+  color: whitesmoke;
+  margin: 8px 4px 4px 3px;
+  font-weight: 600px;
+  font-size: 15px;
+  padding: 1px, 0px, 0px, 1px;
+}
+
+@media (max-width: 664px) {
+  .listCorrida-conteiner-pais {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .listCorrida-pais {
+    margin: 8px 1px 1px 1px;
+    padding: auto;
+  }
+  .listCorrida-conteiner-horario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1px 2px 2px 5px;
+    border-right: 1px grey solid;
+    width: 100px;
+  }
+
+  .listCorrida-text-horario {
+    color: whitesmoke;
+    margin: 8px 10px 2px 2px;
+    padding-left: 3px;
+    font-weight: 600px;
+    font-size: 14px;
+  }
+}
+
+.listCorrida-conteiner-favoritos {
+  display: flex;
+  flex-direction: column;
+  /* margin-left: 15%; */
+  width: 500px;
+}
+.listCorrida-conteiner-favoritos-imagem {
+  display: flex;
+  flex-direction: row;
+  margin-left: 8%;
+  margin-bottom: 5px;
+}
+.listCorrida-imagen-listaCorrida {
+  margin: 5px 10px 2px 0px;
+  padding: 1px;
+}
+
+.listCorrida-conteiner-icons {
+  display: flex;
+  align-self: center;
+  justify-content: flex-end;
+  width: 180px;
+}
+@media (max-width: 664px) {
+  .listCorrida-conteiner-favoritos {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
+  }
+  .listCorrida-conteiner-favoritos-imagem {
+    display: flex;
+    flex-direction: row;
+    margin-left: 8%;
+    margin-bottom: 5px;
+    width: 150px;
+  }
+  .listCorrida-imagen-listaCorrida {
+    margin: 10px 5px 5px 0px;
+    padding: 1px;
+  }
+
+  .listCorrida-conteiner-icons {
+    display: flex;
+    align-self: center;
+    justify-content: flex-end;
+    width: 50%;
+  }
+}
+
+.listCorrida-conteiner-header-card {
+  display: flex;
+  flex-direction: row;
+}
+
+.listCorrida-text {
+  color: white;
+  background-color: #47a44b;
+  padding: 8px 5px;
+  font-weight: 450;
+  font-size: 16px;
+  height: 35px;
+  text-align: center;
+  border-radius: 7px 7px 0px 0px;
+  margin-top: 10px;
+  width: 50%;
+  margin-left: 25%;
+}
+
+.teste {
+  width: 50%;
+  height: 100%;
+}
+@media (max-width: 664px) {
+  .listCorrida-conteiner-header-card {
+    display: flex;
+    flex-direction: row;
+    width: 470px;
+    margin-left: -28%;
+  }
+
+  .listCorrida-text {
+    color: white;
+    background-color: #47a44b;
+    padding: 8px 5px;
+    font-weight: 450;
+    font-size: 16px;
+    height: 35px;
+    text-align: center;
+    border-radius: 7px 7px 0px 0px;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .teste {
+    width: 100%;
+    margin-top: 1px;
+  }
 }

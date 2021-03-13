@@ -19,10 +19,12 @@ import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import LoadingOverlay from "react-loading-overlay";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 import Predicator from "../../predicator/index";
 
@@ -44,6 +46,7 @@ import BD from "../../../asserts/dogs/BD.png";
 import BKW from "../../../asserts/dogs/BKW.png";
 import WF from "../../../asserts/dogs/WF.png";
 import ptBR from "date-fns/locale/pt-BR";
+import { Button } from "@material-ui/core";
 
 function Corridas(props) {
   const [listCorrida, setCorridas] = useState([]);
@@ -53,7 +56,6 @@ function Corridas(props) {
   const [habitarPredicator, sethabitarPredicator] = useState(true);
   const [buscaCorrida, setBuscaCorrida] = useState(true);
   const [loading, setLoading] = useState(false);
-  // console.log("lista betfair " + JSON.stringify(listGalgosBetfair));
 
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
   const corDogs = {
@@ -68,6 +70,7 @@ function Corridas(props) {
     BKW: BKW,
     WF: WF,
   };
+
   useEffect(() => {
     setListGalgos(props.corrida);
     // console.log(props.corrida);
@@ -75,27 +78,6 @@ function Corridas(props) {
     setBuscaCorrida(true);
     setLoading(false);
   }, [props.corrida]); // eslint-disable-line
-  // async function obterlista() {
-  //   const response = await api.get("/listarCorridas");
-  //   // subscriberDadosPista((dadosAposta) => setCorridas(dadosAposta));
-  //   console.log(response.data);
-  //   setCorridas(response.data);
-  // }
-  // UseEffect para as corridas
-  // useEffect(() => {
-  //   if (habitarPredicator) {
-  //     if (listCorrida.length === 0) {
-  //       obterlista();
-  //     } else {
-  //       const interval = setInterval(async () => {
-  //         obterlista();
-  //       }, 60000);
-  //       return () => {
-  //         clearInterval(interval);
-  //       };
-  //     }
-  //   }
-  // }, [habitarPredicator, listCorrida]);
 
   //UseEffect para as ODD da betfair
   useEffect(() => {
@@ -113,24 +95,15 @@ function Corridas(props) {
         };
       }
     }
-
-    // verificarIsOPEN(teste.data[0]);
-    // console.log(teste);
-
-    // verificarIsOPEN(listGalgosBetfair);
-    // setListGalgosBetfair(teste.data[0]);
   }, [
     buscaCorrida,
     habitarPredicator,
+    listGalgosBetfair,
     listCorrida.length,
     listGalgos.length,
-    listGalgosBetfair,
     obterdados,
-  ]);
+  ]); // eslint-disable-line
 
-  // useEffect(() => {
-  //   setODD([odd]);
-  // }, [odd]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function obterdados() {
     const dados = await api.get("/listarMercado", {
@@ -138,7 +111,7 @@ function Corridas(props) {
         id: listGalgos.idMarket,
       },
     });
-    console.log(dados.data[0]);
+    // console.log(dados.data[0]);
     if (dados.data[0]) {
       setListGalgosBetfair(dados.data[0]);
     } else {
@@ -146,6 +119,8 @@ function Corridas(props) {
       setBuscaCorrida(false);
     }
   }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -335,6 +310,16 @@ function Corridas(props) {
       fontWeight: "500",
       fontSize: "15px",
       borderRadius: "3px",
+    },
+    textotodasCorrida: {
+      fontSize: "22px",
+      color: "white",
+      fontWeight: "600",
+      backgroundColor: "#00acc1",
+      borderColor: "#009eb2",
+      borderRadius: "15px",
+      width: "250px",
+      textTransform: "capitalize",
     },
   }));
   const classes = useRowStyles(props);
@@ -652,71 +637,87 @@ function Corridas(props) {
   return (
     <div>
       {loading ? (
-        <div className={classes.conteinerTabela}>
-          <Paper
-            style={{ paddingBottom: 3, paddingTop: 0, background: "#222c3b" }}
-          >
-            <Tabs
-              TabIndicatorProps={{
-                style: { background: "#00ff00", height: "2px" },
-              }}
-              value={value}
-              onChange={handleChange}
-              centered
+        <>
+          <div className={classes.conteinerTabela}>
+            <Paper
+              style={{ paddingBottom: 3, paddingTop: 0, background: "#222c3b" }}
             >
-              <Tab style={{ color: "white" }} label="Analíse" />
-              <Tab style={{ color: "white" }} label="Predictor" />
-              {/* <Tab label="AvB" /> */}
-            </Tabs>
-          </Paper>
-          <ThemeProvider theme={theme}>
-            <TabPanel value={value} index={0}>
-              <TableContainer component={Paper}>
-                <Table className={classes.table}>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell />
-                      <TableCell align={"center"}>Trap</TableCell>
-                      <TableCell align={"center"}>Galgo</TableCell>
-                      <TableCell align={"center"}>Favorito</TableCell>
-                      <TableCell align={"center"}>Rating</TableCell>
-                      {/* <TableCell>Cor</TableCell> */}
-                      <TableCell align={"center"}>Sexo</TableCell>
-                      <TableCell align={"center"}>Peso</TableCell>
-                      {/* <TableCell>Resultado</TableCell> */}
-                      <TableCell align={"center"}>Top Time</TableCell>
-                      <TableCell align={"center"}>M. Pos</TableCell>
-                      <TableCell align={"center"}>U. Pos</TableCell>
-                      <TableCell align={"center"}>M. Tempo</TableCell>
-                      <TableCell align={"center"}>Top Split</TableCell>
-                      <TableCell align={"center"}>M. Split</TableCell>
-                      <TableCell align={"center"}>Recup. Media</TableCell>
-                      <TableCell align={"center"}>BRT</TableCell>
-                      <TableCell align={"center"}>Top Speed</TableCell>
-                      <TableCell align={"center"}>Valor Investido</TableCell>
-                      <TableCell align={"center"}>Probabilidade</TableCell>
-                      <TableCell align={"center"}>BACK</TableCell>
-                      <TableCell align={"center"}>LAY</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {listGalgos.dogs
-                      ? listGalgos.dogs.map((dog) => (
-                          <Rows key={dog.nome} dog={dog}></Rows>
-                        ))
-                      : null}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <Predicator
-                listGalgos={listGalgos}
-                listBetfair={listGalgosBetfair}
-              ></Predicator>
-            </TabPanel>
-          </ThemeProvider>
-        </div>
+              <Tabs
+                TabIndicatorProps={{
+                  style: { background: "#00ff00", height: "2px" },
+                }}
+                value={value}
+                onChange={handleChange}
+                centered
+              >
+                <Tab style={{ color: "white" }} label="Analíse" />
+                <Tab style={{ color: "white" }} label="Predictor" />
+                {/* <Tab label="AvB" /> */}
+              </Tabs>
+            </Paper>
+            <ThemeProvider theme={theme}>
+              <TabPanel value={value} index={0}>
+                <TableContainer component={Paper}>
+                  <Table className={classes.table}>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell />
+                        <TableCell align={"center"}>Trap</TableCell>
+                        <TableCell align={"center"}>Galgo</TableCell>
+                        <TableCell align={"center"}>Favorito</TableCell>
+                        <TableCell align={"center"}>Rating</TableCell>
+                        {/* <TableCell>Cor</TableCell> */}
+                        <TableCell align={"center"}>Sexo</TableCell>
+                        <TableCell align={"center"}>Peso</TableCell>
+                        {/* <TableCell>Resultado</TableCell> */}
+                        <TableCell align={"center"}>Top Time</TableCell>
+                        <TableCell align={"center"}>M. Pos</TableCell>
+                        <TableCell align={"center"}>U. Pos</TableCell>
+                        <TableCell align={"center"}>M. Tempo</TableCell>
+                        <TableCell align={"center"}>Top Split</TableCell>
+                        <TableCell align={"center"}>M. Split</TableCell>
+                        <TableCell align={"center"}>Recup. Media</TableCell>
+                        <TableCell align={"center"}>BRT</TableCell>
+                        <TableCell align={"center"}>Top Speed</TableCell>
+                        <TableCell align={"center"}>Valor Investido</TableCell>
+                        <TableCell align={"center"}>Probabilidade</TableCell>
+                        <TableCell align={"center"}>BACK</TableCell>
+                        <TableCell align={"center"}>LAY</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {listGalgos.dogs
+                        ? listGalgos.dogs.map((dog) => (
+                            <Rows key={dog.nome} dog={dog}></Rows>
+                          ))
+                        : null}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <Predicator
+                  listGalgos={listGalgos}
+                  listBetfair={listGalgosBetfair}
+                ></Predicator>
+              </TabPanel>
+            </ThemeProvider>
+          </div>
+          <div className="coteiner-table-button">
+            <Link
+              to={{
+                pathname: "/DashBoard",
+              }}
+            >
+              <Button
+                className={classes.textotodasCorrida}
+                startIcon={<FormatListBulletedIcon />}
+              >
+                Todas as Corridas
+              </Button>
+            </Link>
+          </div>
+        </>
       ) : (
         <LoadingOverlay
           active={!loading}

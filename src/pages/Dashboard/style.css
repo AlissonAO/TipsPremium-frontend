@@ -1,8 +1,11 @@
-.conteiner-dashboard{
-    margin: 10px 20px;
-    padding: 10px;
-    height:100%;
-    width:100%;
-    padding-right: 15px;
-    padding-left: 15px;
+.conteiner-dashboard {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 664px) {
+  .conteiner-dashboard {
+    height: 100%;
+    width: 100%;
+  }
 }

@@ -6,7 +6,7 @@ export default function Inicio() {
     <div>
       <div className="conteiner-logon">
         <div className="conteiner-inicio">
-          <Link className="btn-logon" to="/Corridas">
+          <Link className="btn-logon" to="/DashBoard">
             Entrar
           </Link>
         </div>

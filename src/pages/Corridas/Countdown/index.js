@@ -54,7 +54,7 @@ export default function Countdown(props) {
       <div className="conteiner-texto">
         <span className="text-inicio">Inicio :</span>
       </div>
-      <div className={atrasado ? "sem-corrida" : "color"}>
+      <div className={atrasado ? "sem-corrida" : "color-horas"}>
         {timeLeft.hours + ":" + timeLeft.minutes + ":" + timeLeft.seconds}
       </div>
     </>

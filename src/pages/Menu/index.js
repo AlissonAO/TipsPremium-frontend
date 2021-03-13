@@ -13,7 +13,7 @@ export default function Menu() {
         <ul className="nav__links">
           <img className="icons" src={home} alt=""></img>
           <li>
-            <Link to="/Corridas">Dashboard</Link>
+            <Link to="/DashBoard">Dashboard</Link>
           </li>
           <img className="space " src={flecha} alt=""></img>
           <img className="icons" src={box} alt=""></img>

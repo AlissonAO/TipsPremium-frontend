@@ -61,3 +61,10 @@
   font-weight: "900";
   color: white;
 }
+
+.coteiner-table-button {
+  /* background-color: yellow; */
+  margin: 10px 20px;
+  padding: 10px;
+  text-align: center;
+}

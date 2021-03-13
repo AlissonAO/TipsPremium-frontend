@@ -9,11 +9,6 @@ import api from "../../../Api/Api";
 export default function MenuCorrida(props) {
   const [loading, setLoading] = useState(false);
   const [listCorrida, setCorridas] = useState([]);
-  // const [contador, setContador] = useState(0)
-
-  //  obterDetalheCorrida() {
-  //         setContador(contador + 1)
-  // }
 
   const BorderLinearProgress = withStyles((theme) => ({
     root: {

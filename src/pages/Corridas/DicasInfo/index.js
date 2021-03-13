@@ -14,7 +14,7 @@ import trap6 from "../../../asserts/trap/6.png";
 
 export default function Dicas(props) {
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
-  // console.log("Dicas" + JSON.stringify(props.valores.Favoritos));
+  console.log("Dicas" + JSON.stringify(props.valores));
   return (
     <div className="conteinerDicas">
       <div className="conteinerCard">

@@ -1,4 +1,4 @@
-.color {
+.color-horas {
   /* color: #4caf50;
   color: #4caf50; */
   color: #ff9800;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 567px) {
-  .color {
+  .color-horas {
     color: #ff9800;
     background-color: #222c3b;
     font-size: 25px;
