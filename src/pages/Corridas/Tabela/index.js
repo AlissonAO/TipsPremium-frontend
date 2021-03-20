@@ -567,8 +567,16 @@ function Corridas(props) {
                 </Typography>
                 <Typography>
                   <div className="conteiner-Historico">
-                    <div>Data de Nasc: {dog.dataNasc}</div>
-                    <div>{dog.qtdSemCorre} dia(s) sem correr</div>
+                    <div className="conteiner-dataNasc">
+                      <div style={{ textAlign: "center" }}>
+                        Data de Nasc: {dog.dataNasc}
+                      </div>
+                    </div>
+                    <div className="conteiner-semCorre">
+                      <div style={{ textAlign: "center" }}>
+                        {dog.qtdSemCorre} dia(s) sem correr
+                      </div>
+                    </div>
                   </div>
                 </Typography>
 
@@ -599,7 +607,14 @@ function Corridas(props) {
                         <TableCell align={"center"}>
                           {historyRow.dis !== "" ? historyRow.dis + "m" : "0"}
                         </TableCell>
-                        <TableCell align={"center"}>{historyRow.trp}</TableCell>
+                        <TableCell align={"center"}>
+                          <img
+                            src={imagens[historyRow.trp]}
+                            alt={""}
+                            width={15}
+                            height={15}
+                          ></img>
+                        </TableCell>
                         <TableCell align={"center"}>
                           {historyRow.peso !== "" ? historyRow.peso : "0"}
                         </TableCell>

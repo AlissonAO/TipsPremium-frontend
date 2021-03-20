@@ -61,6 +61,17 @@
   font-weight: "900";
   color: white;
 }
+.conteiner-dataNasc {
+  border: 1.5px solid #4caf50;
+  border-radius: 50px;
+  width: 250px;
+}
+
+.conteiner-semCorre {
+  border: 1.5px solid #4caf50;
+  border-radius: 50px;
+  width: 250px;
+}
 
 .coteiner-table-button {
   /* background-color: yellow; */
