@@ -1,12 +1,14 @@
 .conteinerDicas {
-  margin: 10px 20px 1px;
+  margin: 10px 20px 2px;
   display: flex;
+  max-width: 100%;
 }
 
 @media screen and (max-width: 567px) {
   .conteinerDicas {
-    margin: 10px 20px;
+    margin: 10px 20px 1px;
     display: flex;
+    max-width: 100%;
   }
 }
 
@@ -28,7 +30,6 @@
   background: #222c3b;
   margin: 0px 0px;
   margin-bottom: 0px;
-
   padding: 10px 25px;
   width: 100%;
   height: 100%;
@@ -56,7 +57,11 @@
   margin: 10px;
   padding: 1px;
 }
-@media screen and (max-width: 567px) {
+.conteinertitulo {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 667px) {
   .textoTrackDicas {
     font-size: 20px;
     font-weight: 600;
@@ -65,12 +70,13 @@
     padding-left: -5px;
     margin: 10px;
   }
+  .conteinertitulo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
 }
 
-.conteinertitulo {
-  display: flex;
-  justify-content: center;
-}
 .conteinerCorrida {
   display: flex;
   justify-content: center;
@@ -119,28 +125,34 @@
 
 .lbl-card {
   border-radius: 50px;
-  padding: 0px 15px;
-  color: #82cbc4;
+  padding: 5px 15px;
+  /* color: #82cbc4; */
+  color: white;
   display: inline-block;
   /* background-color: #2196f3; */
   /* background-color: #00adb5; */
   width: 100%;
-  height: 25px;
+  height: 27px;
   text-align: center;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 700;
+  /* background-color: #009eb2; */
+  border: 1px solid #4caf50;
 }
 .titulo-card {
   border-radius: 50px;
-  padding: 0px 15px;
-  color: #82cbc4;
+  padding: 5px 15px;
+  /* color: #82cbc4; */
+  color: white;
   /* background-color: #4caf50; */
   /* background-color: #00adb5; */
   width: 550px;
-  height: 25px;
+  height: 27px;
   text-align: center;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 700;
+  /* background-color: #009eb2; */
+  border: 1px solid #4caf50;
 }
 
 .imagen {
@@ -160,12 +172,14 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .conteinerTodasImagens {
   display: flex;
   flex-direction: column;
   margin-top: 5px;
+  width: 100px;
 }
 
 @media screen and (max-width: 564px) {
@@ -200,7 +214,7 @@
     flex-direction: row;
     margin: 0px;
     padding: 5px;
-    width: 250px;
+    width: 100%;
     padding-left: 1px;
   }
 
@@ -231,5 +245,104 @@
     margin-top: -11px;
     justify-content: center;
     margin-bottom: 10px;
+  }
+}
+
+.conteinerCard-form {
+  width: 100%;
+  height: 150px;
+  margin: 0px 0px;
+}
+
+.card-dicas-form {
+  background: #222c3b;
+  margin: 0px 0px;
+  margin-bottom: 0px;
+  padding: 10px 5px;
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid #151b24 !important;
+}
+
+.conteinerCorrida-form {
+  display: flex;
+  margin-top: 2px;
+  padding: 6px;
+  width: 100%;
+}
+
+.conteinertitulo-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.texto-wpista {
+  color: white;
+  font-size: 12px;
+  margin-right: 10px;
+}
+.texto-result-cor {
+  color: #ff9800;
+  font-size: 14px;
+  margin-top: -2px;
+  margin-left: 0px;
+}
+.conteiner-form-fora {
+  display: flex;
+  flex-direction: row;
+}
+.conteiner-texto-wpista {
+  width: 130px;
+}
+
+@media screen and (max-width: 664px) {
+  .conteinerCard-form {
+    width: 100%;
+    height: 250px;
+    margin: 0px 0px;
+  }
+
+  .card-dicas-form {
+    background: #222c3b;
+    margin: 0px 0px;
+    margin-bottom: 0px;
+    padding: 10px 5px;
+    width: 100%;
+    max-height: 100%;
+    border-right: 1px solid #151b24 !important;
+  }
+
+  .conteinerCorrida-form {
+    display: flex;
+    margin-top: 2px;
+    padding: 6px;
+    width: 100%;
+    max-height: 100%;
+  }
+
+  .conteinertitulo-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .texto-wpista {
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    margin-right: 10px;
+  }
+  .texto-result-cor {
+    color: #ff9800;
+    font-size: 14px;
+    margin-top: -2px;
+    margin-left: 0px;
+  }
+  .conteiner-form-fora {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+  }
+  .conteiner-texto-wpista {
+    width: 130px;
   }
 }

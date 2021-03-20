@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Countdown from "../Countdown/index";
 
 import "./style.css";
-
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import trap1 from "../../../asserts/trap/1.png";
 import trap2 from "../../../asserts/trap/2.png";
 import trap3 from "../../../asserts/trap/3.png";
@@ -14,7 +14,23 @@ import trap6 from "../../../asserts/trap/6.png";
 
 export default function Dicas(props) {
   const imagens = ["trap0", trap1, trap2, trap3, trap4, trap5, trap6];
-  console.log("Dicas" + JSON.stringify(props.valores));
+  console.log("Dicas" + JSON.stringify(props.valores.form));
+  const [westadio, setwestadio] = useState([]);
+  const [wgrade, setWgrade] = useState([]);
+  const [wdis, setWdis] = useState([]);
+  const [wtemRapido, setWtemRapido] = useState([]);
+  const [wsplit, setWsplit] = useState([]);
+  const [virotia, setVirotia] = useState([]);
+
+  useEffect(() => {
+    setwestadio(props.valores.form.wEstadio);
+    setWgrade(props.valores.form.wGrade);
+    setWdis(props.valores.form.wDistancia);
+    setWtemRapido(props.valores.form.tempoMaisRapido);
+    setWsplit(props.valores.form.splitMaisRapido);
+    setVirotia(props.valores.form.MaiorVencedor);
+  }, [props]); // eslint-disable-line
+
   return (
     <div className="conteinerDicas">
       <div className="conteinerCard">
@@ -164,27 +180,79 @@ export default function Dicas(props) {
         </Card>
       </div>
 
-      {/* <div className="conteinerCard">
-        <Card className="card-dicas">
-          <div className="conteinertitulo">
-            <p class="lbl-card">Informações do Card</p>
+      <div className="conteinerCard-form">
+        <Card className="card-dicas-form">
+          <div className="conteinertitulo-form">
+            <p class="lbl-card">Últimas cinco Corridas</p>
           </div>
-          <div className="conteinerCorrida">
-            <h3 className="textoTrackDicas">
-              {props.valores.TrackName ? props.valores.TrackName : null}
-            </h3>
-            <h3 className="textoGradeDicas">
-              {props.valores.TrackName ? props.valores.Grade : null}
-            </h3>
-            <h3 className="textoGradeDicas">
-              {props.valores.TrackName ? props.valores.Dis + "m" : null}
-            </h3>
+          <div className="conteiner-form-fora">
+            <div>
+              <div className="conteinerCorrida-form">
+                <div className="conteiner-texto-wpista">
+                  <h1 className="texto-wpista">Vencedores da Pista:</h1>
+                </div>
+                <h1 className="texto-result-cor">
+                  {westadio.map((e) => {
+                    return e + "-";
+                  })}
+                </h1>
+              </div>
+              <div className="conteinerCorrida-form">
+                <div className="conteiner-texto-wpista">
+                  <h1 className="texto-wpista">Vencedores da Grade:</h1>
+                </div>
+                <h1 className="texto-result-cor">
+                  {wgrade.map((e) => {
+                    return e + "-";
+                  })}
+                </h1>
+              </div>
+              <div className="conteinerCorrida-form">
+                <div className="conteiner-texto-wpista">
+                  <h1 className="texto-wpista">Vencedores à Dis.:</h1>
+                </div>
+                <h1 className="texto-result-cor">
+                  {wdis.map((e) => {
+                    return e + "-";
+                  })}
+                </h1>
+              </div>
+            </div>
+            <div>
+              <div className="conteinerCorrida-form">
+                <div className="conteiner-texto-wpista">
+                  <h1 className="texto-wpista">Tempo mais rápido:</h1>
+                </div>
+                <h1 className="texto-result-cor">
+                  {wtemRapido.map((e) => {
+                    return e + "-";
+                  })}
+                </h1>
+              </div>
+              <div className="conteinerCorrida-form">
+                <div className="conteiner-texto-wpista">
+                  <h1 className="texto-wpista">Split mais rápido:</h1>
+                </div>
+                <h1 className="texto-result-cor">
+                  {wsplit.map((e) => {
+                    return e + "-";
+                  })}
+                </h1>
+              </div>
+              <div className="conteinerCorrida-form">
+                <div className="conteiner-texto-wpista">
+                  <h1 className="texto-wpista">Mais vitórias:</h1>
+                </div>
+                <h1 className="texto-result-cor">
+                  {virotia.map((e) => {
+                    return e + "-";
+                  })}
+                </h1>
+              </div>
+            </div>
           </div>
         </Card>
-      </div> */}
-      {/* <Card className="card-dicas">
-        <h3>{props.valores.PostPick ? "Post" : null}</h3>
-      </Card> */}
+      </div>
     </div>
   );
 }
