@@ -80,7 +80,7 @@
 .conteinerCorrida {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 
 @media screen and (max-width: 567px) {
