@@ -137,7 +137,7 @@
   font-size: 14px;
   font-weight: 700;
   /* background-color: #009eb2; */
-  border: 1px solid #4caf50;
+  border: 1px solid rgb(12, 212, 99);
 }
 .titulo-card {
   border-radius: 50px;
@@ -152,7 +152,7 @@
   font-size: 14px;
   font-weight: 700;
   /* background-color: #009eb2; */
-  border: 1px solid #4caf50;
+  border: 1px solid rgb(12, 212, 99);
 }
 
 .imagen {
