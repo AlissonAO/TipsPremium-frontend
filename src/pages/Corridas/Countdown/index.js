@@ -9,7 +9,7 @@ export default function Countdown(props) {
   const [atrasado, setAtrasado] = useState(false);
   const calculateTimeLeft = () => {
     let timeLeft = {};
-    const dataCorrida = addHours(new Date(props.data), 3);
+    const dataCorrida = addHours(new Date(props.data), 2);
     const difference = intervalToDuration({
       start: new Date(),
       end: dataCorrida,
@@ -29,7 +29,7 @@ export default function Countdown(props) {
           ? String("0" + difference.seconds)
           : String(difference.seconds),
     };
-    if (new Date().getTime() > addHours(new Date(props.data), 3).getTime()) {
+    if (new Date().getTime() > addHours(new Date(props.data), 2).getTime()) {
       if (!atrasado) {
         setAtrasado(true);
       }
