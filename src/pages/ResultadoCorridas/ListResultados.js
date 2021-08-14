@@ -97,7 +97,9 @@ export default function ResultadoCorrida() {
   }))(LinearProgress);
 
   function isBigEnough(value) {
-    return value.resultado !== "";
+    if (value !== null) {
+      return value.resultado !== "";
+    }
   }
 
   function obterResultado(list) {
