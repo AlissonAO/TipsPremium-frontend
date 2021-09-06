@@ -29,7 +29,7 @@ export default function Countdown(props) {
           ? String("0" + difference.seconds)
           : String(difference.seconds),
     };
-    if (new Date().getTime() > addHours(new Date(props.data), 2).getTime()) {
+    if (new Date().getTime() > addHours(new Date(props.data), 3).getTime()) {
       if (!atrasado) {
         setAtrasado(true);
       }
