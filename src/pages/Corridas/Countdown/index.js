@@ -9,7 +9,7 @@ export default function Countdown(props) {
   const [atrasado, setAtrasado] = useState(false);
   const calculateTimeLeft = () => {
     let timeLeft = {};
-    const dataCorrida = addHours(new Date(props.data), 2);
+    const dataCorrida = addHours(new Date(props.data), 3);
     const difference = intervalToDuration({
       start: new Date(),
       end: dataCorrida,
