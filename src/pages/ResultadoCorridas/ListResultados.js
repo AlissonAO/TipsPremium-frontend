@@ -109,7 +109,11 @@ export default function ResultadoCorrida() {
   }
 
   function obterTrap(valor) {
-    return <img src={imagens[[valor]]} alt={""} width={20} height={20}></img>;
+    if (valor !== null) {
+      return <img src={imagens[[valor]]} alt={""} width={20} height={20}></img>;
+    } else {
+      return "";
+    }
   }
 
   function clickk() {
@@ -213,7 +217,7 @@ export default function ResultadoCorrida() {
                 value={dateSelecionanda}
                 onChange={handleDateChange}
                 disableFuture
-                minDate={new Date("2021-02-17")}
+                minDate={new Date("2021-08-20")}
               />
             </MuiPickersUtilsProvider>
           </ThemeProvider>
