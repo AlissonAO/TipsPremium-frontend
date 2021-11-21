@@ -16,7 +16,7 @@ import clsx from "clsx";
 import { CardContent, Collapse } from "@material-ui/core";
 
 export default function Player() {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const useStyles = makeStyles((theme) => ({
     expand: {
       transform: "rotate(0deg)",
@@ -71,6 +71,7 @@ export default function Player() {
                   controls
                   muted={true}
                   playing
+                  ope
                 />
               </div>
               <div className="item-player">
