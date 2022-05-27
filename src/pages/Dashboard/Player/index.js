@@ -65,25 +65,25 @@ export default function Player() {
             <div className="conteiner-video">
               <div className="item-player">
                 <ReactPlayer
-                  width={"100%"}
-                  height={"100%"}
-                  url="https://betamg-i.akamaihd.net/hls/live/513429/willhill/0_tklzcakd_1_1/chunklist.m3u8"
+                  width={"90%"}
+                  height={"90%"}
+                  url="https://streamamg-whg0001.akamaized.net/hls/live/2042669/0_tklzcakd_1/chunklist.m3u8"
                   controls
                   muted={true}
                   playing
                   ope
                 />
               </div>
-              <div className="item-player">
+              {/* <div className="item-player">
                 <ReactPlayer
                   width={"100%"}
                   height={"100%"}
-                  url="https://betamg-i.akamaihd.net/hls/live/513429/willhill/citywalkfeed/playlist.m3u8"
+                  url="https://streamamg-whg0001.akamaized.net/hls/live/2042669/0_tklzcakd_2/chunklist.m3u8"
                   controls
                   muted={true}
                   playing
                 />
-              </div>
+              </div> */}
             </div>
           </CardContent>
         </Collapse>
